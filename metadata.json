@@ -1,0 +1,6 @@
+{
+  "name": "CodeJudge AI",
+  "description": "A high-fidelity LeetCode-style local platform with deep mock test case evaluations, custom code patterns, stats tracking, and a premium dark development environment.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,1307 @@
+{
+  "problems": [
+    {
+      "id": "Q1",
+      "title": "Flatten Nested Array",
+      "difficulty": "Easy",
+      "description": "Given a nested array `arr`, return a flattened array. A flattened array contains all the elements of the original array but with all nested arrays recursively expanded into a single-level array.\n\n### Constraints\n- Solve without using `Array.prototype.flat`.",
+      "constraints": [
+        "Solve without using Array.prototype.flat."
+      ],
+      "starter_code": {
+        "typescript": "export function flattenArray(arr: any[]): any[] {\n  // Write your code here\n}"
+      },
+      "unit_tests": {
+        "sample_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { flattenArray } from \"./solution\";\n\ndescribe(\"Q1 - Flatten Nested Array (sample)\", () => {\n  it(\"flattens a single level of nesting\", () => {\n    expect(flattenArray([1, [2], [3, 4]])).toEqual([1, 2, 3, 4]);\n  });\n  it(\"flattens deeply nested arrays\", () => {\n    expect(flattenArray([1, [2, [3, [4]]], 5])).toEqual([1, 2, 3, 4, 5]);\n  });\n  it(\"returns empty array for empty input\", () => {\n    expect(flattenArray([])).toEqual([]);\n  });\n  it(\"returns unchanged array when no nesting\", () => {\n    expect(flattenArray([1, 2, 3])).toEqual([1, 2, 3]);\n  });\n});",
+        "hidden_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { flattenArray } from \"./solution\";\n\ndescribe(\"Q1 - Flatten Nested Array (hidden)\", () => {\n  it(\"handles array with only nested arrays\", () => {\n    expect(flattenArray([[1], [2], [3]])).toEqual([1, 2, 3]);\n  });\n  it(\"handles 5 levels deep nesting\", () => {\n    expect(flattenArray([[[[[42]]]]])).toEqual([42]);\n  });\n  it(\"handles mixed types at various depths\", () => {\n    expect(flattenArray([1, [2, [3]], \"a\", [\"b\", [\"c\"]]])).toEqual([1, 2, 3, \"a\", \"b\", \"c\"]);\n  });\n  it(\"does not use Array.prototype.flat (structural check)\", () => {\n    const originalFlat = Array.prototype.flat;\n    let flatCalled = false;\n    Array.prototype.flat = function(...args) {\n      flatCalled = true;\n      return originalFlat.apply(this, args);\n    };\n    flattenArray([1, [2]]);\n    Array.prototype.flat = originalFlat;\n    expect(flatCalled).toBe(false);\n  });\n  it(\"handles large deeply nested input without stack overflow\", () => {\n    let arr: any = [1];\n    for (let i = 0; i < 100; i++) arr = [arr];\n    expect(flattenArray(arr)).toEqual([1]);\n  });\n});"
+      },
+      "test_cases_metadata": [
+        {
+          "test_name": "flattens a single level of nesting",
+          "is_hidden": false
+        },
+        {
+          "test_name": "flattens deeply nested arrays",
+          "is_hidden": false
+        },
+        {
+          "test_name": "returns empty array for empty input",
+          "is_hidden": false
+        },
+        {
+          "test_name": "returns unchanged array when no nesting",
+          "is_hidden": false
+        },
+        {
+          "test_name": "handles array with only nested arrays",
+          "is_hidden": true
+        },
+        {
+          "test_name": "handles 5 levels deep nesting",
+          "is_hidden": true
+        },
+        {
+          "test_name": "handles mixed types at various depths",
+          "is_hidden": true
+        },
+        {
+          "test_name": "does not use Array.prototype.flat (structural check)",
+          "is_hidden": true
+        },
+        {
+          "test_name": "handles large deeply nested input without stack overflow",
+          "is_hidden": true
+        }
+      ]
+    },
+    {
+      "id": "Q2",
+      "title": "Group Array by Size",
+      "difficulty": "Easy",
+      "description": "Given an array `arr` and an integer `size`, return an array of groups. Each group should contain `size` consecutive elements from `arr`. The final group may contain fewer than `size` elements.\n\n### Constraints\n- Solve without using external utility libraries.",
+      "constraints": [
+        "Solve without using external utility libraries."
+      ],
+      "starter_code": {
+        "typescript": "export function groupBySize(arr: any[], size: number): any[][] {\n  // Write your code here\n}"
+      },
+      "unit_tests": {
+        "sample_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { groupBySize } from \"./solution\";\n\ndescribe(\"Q2 - Group Array by Size (sample)\", () => {\n  it(\"groups evenly divisible array\", () => {\n    expect(groupBySize([1, 2, 3, 4, 5, 6], 2)).toEqual([[1, 2], [3, 4], [5, 6]]);\n  });\n  it(\"handles remainder in final group\", () => {\n    expect(groupBySize([1, 2, 3, 4, 5], 4)).toEqual([[1, 2, 3, 4], [5]]);\n  });\n  it(\"returns empty array for empty input\", () => {\n    expect(groupBySize([], 3)).toEqual([]);\n  });\n});",
+        "hidden_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { groupBySize } from \"./solution\";\n\ndescribe(\"Q2 - Group Array by Size (hidden)\", () => {\n  it(\"size equals array length returns one group\", () => {\n    expect(groupBySize([1, 2, 3], 3)).toEqual([[1, 2, 3]]);\n  });\n  it(\"size of 1 returns each element in own group\", () => {\n    expect(groupBySize([5, 10, 15], 1)).toEqual([[5], [10], [15]]);\n  });\n  it(\"size larger than array returns single group\", () => {\n    expect(groupBySize([1, 2], 10)).toEqual([[1, 2]]);\n  });\n  it(\"works with string array\", () => {\n    expect(groupBySize([\"a\",\"b\",\"c\",\"d\"], 2)).toEqual([[\"a\",\"b\"], [\"c\",\"d\"]]);\n  });\n  it(\"groups array of 7 with size 3 correctly\", () => {\n    expect(groupBySize([1,2,3,4,5,6,7], 3)).toEqual([[1,2,3],[4,5,6],[7]]);\n  });\n});"
+      },
+      "test_cases_metadata": [
+        {
+          "test_name": "groups evenly divisible array",
+          "is_hidden": false
+        },
+        {
+          "test_name": "handles remainder in final group",
+          "is_hidden": false
+        },
+        {
+          "test_name": "returns empty array for empty input",
+          "is_hidden": false
+        },
+        {
+          "test_name": "size equals array length returns one group",
+          "is_hidden": true
+        },
+        {
+          "test_name": "size of 1 returns each element in own group",
+          "is_hidden": true
+        },
+        {
+          "test_name": "size larger than array returns single group",
+          "is_hidden": true
+        },
+        {
+          "test_name": "works with string array",
+          "is_hidden": true
+        },
+        {
+          "test_name": "groups array of 7 with size 3 correctly",
+          "is_hidden": true
+        }
+      ]
+    },
+    {
+      "id": "Q3",
+      "title": "Reverse Array in Groups",
+      "difficulty": "Easy",
+      "description": "Given an array `arr` and an integer `size`, reverse the elements of the array in groups of length `size`. The final group should also be reversed even if it contains fewer than `size` elements.",
+      "constraints": [],
+      "starter_code": {
+        "typescript": "export function reverseInGroups(arr: any[], size: number): any[] {\n  // Write your code here\n}"
+      },
+      "unit_tests": {
+        "sample_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { reverseInGroups } from \"./solution\";\n\ndescribe(\"Q3 - Reverse Array in Groups (sample)\", () => {\n  it(\"reverses evenly divisible groups\", () => {\n    expect(reverseInGroups([1,2,3,4,5,6], 2)).toEqual([2,1,4,3,6,5]);\n  });\n  it(\"reverses with remainder final group\", () => {\n    expect(reverseInGroups([1,2,3,4,5], 3)).toEqual([3,2,1,5,4]);\n  });\n  it(\"reverses when size exceeds array length\", () => {\n    expect(reverseInGroups([8,9], 5)).toEqual([9,8]);\n  });\n});",
+        "hidden_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { reverseInGroups } from \"./solution\";\n\ndescribe(\"Q3 - Reverse Array in Groups (hidden)\", () => {\n  it(\"size 1 returns original array\", () => {\n    expect(reverseInGroups([1, 2, 3], 1)).toEqual([1, 2, 3]);\n  });\n  it(\"size equals length reverses entire array\", () => {\n    expect(reverseInGroups([1, 2, 3, 4], 4)).toEqual([4, 3, 2, 1]);\n  });\n  it(\"empty array returns empty\", () => {\n    expect(reverseInGroups([], 3)).toEqual([]);\n  });\n  it(\"single element array returns unchanged\", () => {\n    expect(reverseInGroups([42], 3)).toEqual([42]);\n  });\n  it(\"handles group size 3 with 7 elements correctly\", () => {\n    expect(reverseInGroups([1,2,3,4,5,6,7], 3)).toEqual([3,2,1,6,5,4,7]);\n  });\n});"
+      },
+      "test_cases_metadata": [
+        {
+          "test_name": "reverses evenly divisible groups",
+          "is_hidden": false
+        },
+        {
+          "test_name": "reverses with remainder final group",
+          "is_hidden": false
+        },
+        {
+          "test_name": "reverses when size exceeds array length",
+          "is_hidden": false
+        },
+        {
+          "test_name": "size 1 returns original array",
+          "is_hidden": true
+        },
+        {
+          "test_name": "size equals length reverses entire array",
+          "is_hidden": true
+        },
+        {
+          "test_name": "empty array returns empty",
+          "is_hidden": true
+        },
+        {
+          "test_name": "single element array returns unchanged",
+          "is_hidden": true
+        },
+        {
+          "test_name": "handles group size 3 with 7 elements correctly",
+          "is_hidden": true
+        }
+      ]
+    },
+    {
+      "id": "Q4",
+      "title": "Split String into Chunks",
+      "difficulty": "Easy",
+      "description": "Given a string `s` and an integer `size`, split the string into chunks of length `size`. Return an array containing the chunks in order. The last chunk may contain fewer than `size` characters.",
+      "constraints": [],
+      "starter_code": {
+        "typescript": "export function splitIntoChunks(s: string, size: number): string[] {\n  // Write your code here\n}"
+      },
+      "unit_tests": {
+        "sample_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { splitIntoChunks } from \"./solution\";\n\ndescribe(\"Q4 - Split String into Chunks (sample)\", () => {\n  it(\"splits evenly into chunks\", () => {\n    expect(splitIntoChunks(\"abcdef\", 2)).toEqual([\"ab\", \"cd\", \"ef\"]);\n  });\n  it(\"last chunk has fewer characters\", () => {\n    expect(splitIntoChunks(\"helloworld\", 3)).toEqual([\"hel\", \"low\", \"orl\", \"d\"]);\n  });\n  it(\"returns empty array for empty string\", () => {\n    expect(splitIntoChunks(\"\", 1)).toEqual([]);\n  });\n});",
+        "hidden_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { splitIntoChunks } from \"./solution\";\n\ndescribe(\"Q4 - Split String into Chunks (hidden)\", () => {\n  it(\"size equals string length returns one chunk\", () => {\n    expect(splitIntoChunks(\"hello\", 5)).toEqual([\"hello\"]);\n  });\n  it(\"size 1 splits every character\", () => {\n    expect(splitIntoChunks(\"abc\", 1)).toEqual([\"a\", \"b\", \"c\"]);\n  });\n  it(\"size larger than string returns single chunk\", () => {\n    expect(splitIntoChunks(\"hi\", 10)).toEqual([\"hi\"]);\n  });\n  it(\"handles unicode characters correctly\", () => {\n    expect(splitIntoChunks(\"aabbcc\", 2)).toEqual([\"aa\", \"bb\", \"cc\"]);\n  });\n  it(\"handles size of exactly 4 on 9-char string\", () => {\n    expect(splitIntoChunks(\"123456789\", 4)).toEqual([\"1234\", \"5678\", \"9\"]);\n  });\n});"
+      },
+      "test_cases_metadata": [
+        {
+          "test_name": "splits evenly into chunks",
+          "is_hidden": false
+        },
+        {
+          "test_name": "last chunk has fewer characters",
+          "is_hidden": false
+        },
+        {
+          "test_name": "returns empty array for empty string",
+          "is_hidden": false
+        },
+        {
+          "test_name": "size equals string length returns one chunk",
+          "is_hidden": true
+        },
+        {
+          "test_name": "size 1 splits every character",
+          "is_hidden": true
+        },
+        {
+          "test_name": "size larger than string returns single chunk",
+          "is_hidden": true
+        },
+        {
+          "test_name": "handles unicode characters correctly",
+          "is_hidden": true
+        },
+        {
+          "test_name": "handles size of exactly 4 on 9-char string",
+          "is_hidden": true
+        }
+      ]
+    },
+    {
+      "id": "Q5",
+      "title": "Merge Consecutive Subarrays",
+      "difficulty": "Easy",
+      "description": "Given a 2D array `arr`, return a single merged array containing all elements in order.\n\n### Constraints\n- Solve without using `Array.prototype.flat`.",
+      "constraints": [
+        "Solve without using Array.prototype.flat."
+      ],
+      "starter_code": {
+        "typescript": "export function mergeSubarrays(arr: any[][]): any[] {\n  // Write your code here\n}"
+      },
+      "unit_tests": {
+        "sample_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { mergeSubarrays } from \"./solution\";\n\ndescribe(\"Q5 - Merge Consecutive Subarrays (sample)\", () => {\n  it(\"merges standard 2D array\", () => {\n    expect(mergeSubarrays([[1,2],[3,4],[5]])).toEqual([1,2,3,4,5]);\n  });\n  it(\"handles empty subarray\", () => {\n    expect(mergeSubarrays([[7],[8,9],[]])).toEqual([7,8,9]);\n  });\n  it(\"returns empty for empty outer array\", () => {\n    expect(mergeSubarrays([])).toEqual([]);\n  });\n});",
+        "hidden_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { mergeSubarrays } from \"./solution\";\n\ndescribe(\"Q5 - Merge Consecutive Subarrays (hidden)\", () => {\n  it(\"all empty subarrays returns empty\", () => {\n    expect(mergeSubarrays([[], [], []])).toEqual([]);\n  });\n  it(\"single subarray returns its elements\", () => {\n    expect(mergeSubarrays([[1, 2, 3]])).toEqual([1, 2, 3]);\n  });\n  it(\"preserves order of elements across subarrays\", () => {\n    expect(mergeSubarrays([[3],[1],[2]])).toEqual([3,1,2]);\n  });\n  it(\"does not use Array.prototype.flat\", () => {\n    const orig = Array.prototype.flat;\n    let called = false;\n    Array.prototype.flat = function(...a) {\n      called = true;\n      return orig.apply(this, a);\n    };\n    mergeSubarrays([[1],[2]]);\n    Array.prototype.flat = orig;\n    expect(called).toBe(false);\n  });\n});"
+      },
+      "test_cases_metadata": [
+        {
+          "test_name": "merges standard 2D array",
+          "is_hidden": false
+        },
+        {
+          "test_name": "handles empty subarray",
+          "is_hidden": false
+        },
+        {
+          "test_name": "returns empty for empty outer array",
+          "is_hidden": false
+        },
+        {
+          "test_name": "all empty subarrays returns empty",
+          "is_hidden": true
+        },
+        {
+          "test_name": "single subarray returns its elements",
+          "is_hidden": true
+        },
+        {
+          "test_name": "preserves order of elements across subarrays",
+          "is_hidden": true
+        },
+        {
+          "test_name": "does not use Array.prototype.flat",
+          "is_hidden": true
+        }
+      ]
+    },
+    {
+      "id": "Q6",
+      "title": "Rotate Array by K Positions",
+      "difficulty": "Easy",
+      "description": "Given an array `arr` and an integer `k`, rotate the array to the right by `k` positions.",
+      "constraints": [],
+      "starter_code": {
+        "typescript": "export function rotateArray(arr: any[], k: number): any[] {\n  // Write your code here\n}"
+      },
+      "unit_tests": {
+        "sample_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { rotateArray } from \"./solution\";\n\ndescribe(\"Q6 - Rotate Array by K Positions (sample)\", () => {\n  it(\"rotates right by k=2\", () => {\n    expect(rotateArray([1,2,3,4,5], 2)).toEqual([4,5,1,2,3]);\n  });\n  it(\"handles k larger than array length\", () => {\n    expect(rotateArray([1,2], 3)).toEqual([2,1]);\n  });\n  it(\"returns empty array for empty input\", () => {\n    expect(rotateArray([], 1)).toEqual([]);\n  });\n});",
+        "hidden_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { rotateArray } from \"./solution\";\n\ndescribe(\"Q6 - Rotate Array by K Positions (hidden)\", () => {\n  it(\"k=0 returns original array\", () => {\n    expect(rotateArray([1,2,3], 0)).toEqual([1,2,3]);\n  });\n  it(\"k equals array length returns original\", () => {\n    expect(rotateArray([1,2,3], 3)).toEqual([1,2,3]);\n  });\n  it(\"single element array always returns itself\", () => {\n    expect(rotateArray([99], 100)).toEqual([99]);\n  });\n  it(\"handles k that is a multiple of array length\", () => {\n    expect(rotateArray([1,2,3,4], 8)).toEqual([1,2,3,4]);\n  });\n  it(\"rotates by 1 correctly\", () => {\n    expect(rotateArray([1,2,3,4,5], 1)).toEqual([5,1,2,3,4]);\n  });\n});"
+      },
+      "test_cases_metadata": [
+        {
+          "test_name": "rotates right by k=2",
+          "is_hidden": false
+        },
+        {
+          "test_name": "handles k larger than array length",
+          "is_hidden": false
+        },
+        {
+          "test_name": "returns empty array for empty input",
+          "is_hidden": false
+        },
+        {
+          "test_name": "k=0 returns original array",
+          "is_hidden": true
+        },
+        {
+          "test_name": "k equals array length returns original",
+          "is_hidden": true
+        },
+        {
+          "test_name": "single element array always returns itself",
+          "is_hidden": true
+        },
+        {
+          "test_name": "handles k that is a multiple of array length",
+          "is_hidden": true
+        },
+        {
+          "test_name": "rotates by 1 correctly",
+          "is_hidden": true
+        }
+      ]
+    },
+    {
+      "id": "Q7",
+      "title": "Partition Array into Equal Pairs",
+      "difficulty": "Easy",
+      "description": "Given an array `arr`, return an array containing pairs of consecutive elements. If the array has an odd number of elements, the final pair should contain only one element.",
+      "constraints": [],
+      "starter_code": {
+        "typescript": "export function partitionIntoPairs(arr: any[]): any[][] {\n  // Write your code here\n}"
+      },
+      "unit_tests": {
+        "sample_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { partitionIntoPairs } from \"./solution\";\n\ndescribe(\"Q7 - Partition Array into Equal Pairs (sample)\", () => {\n  it(\"pairs even-length array\", () => {\n    expect(partitionIntoPairs([1,2,3,4])).toEqual([[1,2],[3,4]]);\n  });\n  it(\"handles odd-length array with single-element tail\", () => {\n    expect(partitionIntoPairs([5,6,7])).toEqual([[5,6],[7]]);\n  });\n  it(\"returns empty for empty input\", () => {\n    expect(partitionIntoPairs([])).toEqual([]);\n  });\n});",
+        "hidden_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { partitionIntoPairs } from \"./solution\";\n\ndescribe(\"Q7 - Partition Array into Equal Pairs (hidden)\", () => {\n  it(\"single element yields one pair with one element\", () => {\n    expect(partitionIntoPairs([42])).toEqual([[42]]);\n  });\n  it(\"two elements yields one pair\", () => {\n    expect(partitionIntoPairs([1,2])).toEqual([[1,2]]);\n  });\n  it(\"six elements yields three pairs\", () => {\n    expect(partitionIntoPairs([1,2,3,4,5,6])).toEqual([[1,2],[3,4],[5,6]]);\n  });\n  it(\"works with string elements\", () => {\n    expect(partitionIntoPairs([\"a\",\"b\",\"c\"])).toEqual([[\"a\",\"b\"],[\"c\"]]);\n  });\n});"
+      },
+      "test_cases_metadata": [
+        {
+          "test_name": "pairs even-length array",
+          "is_hidden": false
+        },
+        {
+          "test_name": "handles odd-length array with single-element tail",
+          "is_hidden": false
+        },
+        {
+          "test_name": "returns empty for empty input",
+          "is_hidden": false
+        },
+        {
+          "test_name": "single element yields one pair with one element",
+          "is_hidden": true
+        },
+        {
+          "test_name": "two elements yields one pair",
+          "is_hidden": true
+        },
+        {
+          "test_name": "six elements yields three pairs",
+          "is_hidden": true
+        },
+        {
+          "test_name": "works with string elements",
+          "is_hidden": true
+        }
+      ]
+    },
+    {
+      "id": "Q8",
+      "title": "Remove Every Nth Element",
+      "difficulty": "Easy",
+      "description": "Given an array `arr` and an integer `n`, remove every nth element from the array (1-based position). Return the remaining elements in order.",
+      "constraints": [],
+      "starter_code": {
+        "typescript": "export function removeEveryNth(arr: any[], n: number): any[] {\n  // Write your code here\n}"
+      },
+      "unit_tests": {
+        "sample_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { removeEveryNth } from \"./solution\";\n\ndescribe(\"Q8 - Remove Every Nth Element (sample)\", () => {\n  it(\"removes every 2nd element\", () => {\n    expect(removeEveryNth([1,2,3,4,5,6], 2)).toEqual([1,3,5]);\n  });\n  it(\"removes every 3rd element\", () => {\n    expect(removeEveryNth([10,20,30,40,50], 3)).toEqual([10,20,40,50]);\n  });\n  it(\"n=1 removes all elements\", () => {\n    expect(removeEveryNth([7,8], 1)).toEqual([]);\n  });\n});",
+        "hidden_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { removeEveryNth } from \"./solution\";\n\ndescribe(\"Q8 - Remove Every Nth Element (hidden)\", () => {\n  it(\"n larger than array length removes nothing\", () => {\n    expect(removeEveryNth([1,2,3], 10)).toEqual([1,2,3]);\n  });\n  it(\"empty array returns empty\", () => {\n    expect(removeEveryNth([], 3)).toEqual([]);\n  });\n  it(\"n equals array length removes last element\", () => {\n    expect(removeEveryNth([1,2,3,4], 4)).toEqual([1,2,3]);\n  });\n  it(\"removes correct positions in 7-element array with n=3\", () => {\n    expect(removeEveryNth([1,2,3,4,5,6,7], 3)).toEqual([1,2,4,5,7]);\n  });\n});"
+      },
+      "test_cases_metadata": [
+        {
+          "test_name": "removes every 2nd element",
+          "is_hidden": false
+        },
+        {
+          "test_name": "removes every 3rd element",
+          "is_hidden": false
+        },
+        {
+          "test_name": "n=1 removes all elements",
+          "is_hidden": false
+        },
+        {
+          "test_name": "n larger than array length removes nothing",
+          "is_hidden": true
+        },
+        {
+          "test_name": "empty array returns empty",
+          "is_hidden": true
+        },
+        {
+          "test_name": "n equals array length removes last element",
+          "is_hidden": true
+        },
+        {
+          "test_name": "removes correct positions in 7-element array with n=3",
+          "is_hidden": true
+        }
+      ]
+    },
+    {
+      "id": "Q9",
+      "title": "Divide Array into Two Halves",
+      "difficulty": "Easy",
+      "description": "Given an array `arr`, divide it into two halves. If the array length is odd, the first half should contain one extra element. Return the two halves as a 2D array.",
+      "constraints": [],
+      "starter_code": {
+        "typescript": "export function divideIntoHalves(arr: any[]): [any[], any[]] {\n  // Write your code here\n}"
+      },
+      "unit_tests": {
+        "sample_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { divideIntoHalves } from \"./solution\";\n\ndescribe(\"Q9 - Divide Array into Two Halves (sample)\", () => {\n  it(\"splits even-length array equally\", () => {\n    expect(divideIntoHalves([1,2,3,4])).toEqual([[1,2],[3,4]]);\n  });\n  it(\"first half gets extra element on odd length\", () => {\n    expect(divideIntoHalves([1,2,3,4,5])).toEqual([[1,2,3],[4,5]]);\n  });\n  it(\"empty array returns two empty halves\", () => {\n    expect(divideIntoHalves([])).toEqual([[],[]]);\n  });\n});",
+        "hidden_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { divideIntoHalves } from \"./solution\";\n\ndescribe(\"Q9 - Divide Array into Two Halves (hidden)\", () => {\n  it(\"single element goes to first half\", () => {\n    expect(divideIntoHalves([42])).toEqual([[42],[]]);\n  });\n  it(\"two elements split evenly\", () => {\n    expect(divideIntoHalves([1,2])).toEqual([[1],[2]]);\n  });\n  it(\"seven elements split 4 and 3\", () => {\n    expect(divideIntoHalves([1,2,3,4,5,6,7])).toEqual([[1,2,3,4],[5,6,7]]);\n  });\n  it(\"preserves original array (no mutation)\", () => {\n    const arr = [1,2,3,4];\n    divideIntoHalves(arr);\n    expect(arr).toEqual([1,2,3,4]);\n  });\n});"
+      },
+      "test_cases_metadata": [
+        {
+          "test_name": "splits even-length array equally",
+          "is_hidden": false
+        },
+        {
+          "test_name": "first half gets extra element on odd length",
+          "is_hidden": false
+        },
+        {
+          "test_name": "empty array returns two empty halves",
+          "is_hidden": false
+        },
+        {
+          "test_name": "single element goes to first half",
+          "is_hidden": true
+        },
+        {
+          "test_name": "two elements split evenly",
+          "is_hidden": true
+        },
+        {
+          "test_name": "seven elements split 4 and 3",
+          "is_hidden": true
+        },
+        {
+          "test_name": "preserves original array (no mutation)",
+          "is_hidden": true
+        }
+      ]
+    },
+    {
+      "id": "Q10",
+      "title": "Interleave Two Arrays",
+      "difficulty": "Easy",
+      "description": "Given two arrays `arr1` and `arr2`, return a new array by alternating elements from each array. If one array is longer, append the remaining elements at the end.",
+      "constraints": [],
+      "starter_code": {
+        "typescript": "export function interleaveArrays(arr1: any[], arr2: any[]): any[] {\n  // Write your code here\n}"
+      },
+      "unit_tests": {
+        "sample_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { interleaveArrays } from \"./solution\";\n\ndescribe(\"Q10 - Interleave Two Arrays (sample)\", () => {\n  it(\"interleaves equal-length arrays\", () => {\n    expect(interleaveArrays([1,3,5],[2,4,6])).toEqual([1,2,3,4,5,6]);\n  });\n  it(\"appends remaining elements from longer array\", () => {\n    expect(interleaveArrays([1,2],[3,4,5,6])).toEqual([1,3,2,4,5,6]);\n  });\n  it(\"first array empty returns second unchanged\", () => {\n    expect(interleaveArrays([],[1,2])).toEqual([1,2]);\n  });\n});",
+        "hidden_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { interleaveArrays } from \"./solution\";\n\ndescribe(\"Q10 - Interleave Two Arrays (hidden)\", () => {\n  it(\"both arrays empty returns empty\", () => {\n    expect(interleaveArrays([],[])).toEqual([]);\n  });\n  it(\"second array empty returns first unchanged\", () => {\n    expect(interleaveArrays([1,2,3],[])).toEqual([1,2,3]);\n  });\n  it(\"arr1 longer appends remaining arr1 elements\", () => {\n    expect(interleaveArrays([1,2,3,4],[5])).toEqual([1,5,2,3,4]);\n  });\n  it(\"single element arrays interleave correctly\", () => {\n    expect(interleaveArrays([1],[2])).toEqual([1,2]);\n  });\n});"
+      },
+      "test_cases_metadata": [
+        {
+          "test_name": "interleaves equal-length arrays",
+          "is_hidden": false
+        },
+        {
+          "test_name": "appends remaining elements from longer array",
+          "is_hidden": false
+        },
+        {
+          "test_name": "first array empty returns second unchanged",
+          "is_hidden": false
+        },
+        {
+          "test_name": "both arrays empty returns empty",
+          "is_hidden": true
+        },
+        {
+          "test_name": "second array empty returns first unchanged",
+          "is_hidden": true
+        },
+        {
+          "test_name": "arr1 longer appends remaining arr1 elements",
+          "is_hidden": true
+        },
+        {
+          "test_name": "single element arrays interleave correctly",
+          "is_hidden": true
+        }
+      ]
+    },
+    {
+      "id": "M1",
+      "title": "Item List Manager",
+      "difficulty": "Medium",
+      "description": "Create a React application called 'Item List Manager' that displays a list of items and allows users to add new items to the list. Items should be displayed in an unordered list (`<ul>`).\n\n### Requirements\n- When the application loads, it should display an empty list.\n- The input field (textbox) should accept user text input.\n- When the button is clicked, the text from the input field is added to the list and the input field is cleared.\n- If the input field is empty or contains only whitespace, clicking the button should not add anything.",
+      "constraints": [
+        "Input should not add empty or whitespace-only elements.",
+        "Render list inside a 'ul' element and items as 'li' elements with 'listitem' role."
+      ],
+      "starter_code": {
+        "typescript": "import React, { useState } from 'react';\n\nexport default function ItemListManager() {\n  // Write your code here\n}"
+      },
+      "unit_tests": {
+        "sample_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { render, screen, fireEvent } from \"@testing-library/react\";\nimport ItemListManager from \"./ItemListManager\";\nimport React from \"react\";\n\ndescribe(\"M1 - Item List Manager (sample)\", () => {\n  it(\"renders with an empty list initially\", () => {\n    render(<ItemListManager />);\n    expect(screen.queryAllByRole(\"listitem\")).toHaveLength(0);\n  });\n  it(\"adds an item when text is entered and button is clicked\", () => {\n    render(<ItemListManager />);\n    fireEvent.change(screen.getByRole(\"textbox\"), { target: { value: \"First Item\" } });\n    fireEvent.click(screen.getByRole(\"button\", { name: /add item/i }));\n    expect(screen.getByText(\"First Item\")).toBeInTheDocument();\n  });\n  it(\"clears the input field after adding an item\", () => {\n    render(<ItemListManager />);\n    const input = screen.getByRole(\"textbox\");\n    fireEvent.change(input, { target: { value: \"Item\" } });\n    fireEvent.click(screen.getByRole(\"button\", { name: /add item/i }));\n    expect(input).toHaveValue(\"\");\n  });\n  it(\"does not add empty item when input is blank\", () => {\n    render(<ItemListManager />);\n    fireEvent.click(screen.getByRole(\"button\", { name: /add item/i }));\n    expect(screen.queryAllByRole(\"listitem\")).toHaveLength(0);\n  });\n});",
+        "hidden_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { render, screen, fireEvent } from \"@testing-library/react\";\nimport ItemListManager from \"./ItemListManager\";\nimport React from \"react\";\n\ndescribe(\"M1 - Item List Manager (hidden)\", () => {\n  it(\"adds multiple items in order\", () => {\n    render(<ItemListManager />);\n    const input = screen.getByRole(\"textbox\");\n    const btn = screen.getByRole(\"button\", { name: /add item/i });\n\n    fireEvent.change(input, { target: { value: \"First\" } });\n    fireEvent.click(btn);\n    fireEvent.change(input, { target: { value: \"Second\" } });\n    fireEvent.click(btn);\n\n    const items = screen.getAllByRole(\"listitem\");\n    expect(items).toHaveLength(2);\n    expect(items[0]).toHaveTextContent(\"First\");\n    expect(items[1]).toHaveTextContent(\"Second\");\n  });\n  it(\"does not add whitespace-only input\", () => {\n    render(<ItemListManager />);\n    fireEvent.change(screen.getByRole(\"textbox\"), { target: { value: \"   \" } });\n    fireEvent.click(screen.getByRole(\"button\", { name: /add item/i }));\n    expect(screen.queryAllByRole(\"listitem\")).toHaveLength(0);\n  });\n  it(\"renders items inside a <ul> element\", () => {\n    const { container } = render(<ItemListManager />);\n    fireEvent.change(screen.getByRole(\"textbox\"), { target: { value: \"Item\" } });\n    fireEvent.click(screen.getByRole(\"button\", { name: /add item/i }));\n    expect(container.querySelector(\"ul\")).not.toBeNull();\n    expect(container.querySelectorAll(\"li\")).toHaveLength(1);\n  });\n  it(\"can add 10+ items without issue\", () => {\n    render(<ItemListManager />);\n    const input = screen.getByRole(\"textbox\");\n    const btn = screen.getByRole(\"button\", { name: /add item/i });\n    for (let i = 1; i <= 10; i++) {\n      fireEvent.change(input, { target: { value: `Item ${i}` } });\n      fireEvent.click(btn);\n    }\n    expect(screen.getAllByRole(\"listitem\")).toHaveLength(10);\n  });\n});"
+      },
+      "test_cases_metadata": [
+        {
+          "test_name": "renders with an empty list initially",
+          "is_hidden": false
+        },
+        {
+          "test_name": "adds an item when text is entered and button is clicked",
+          "is_hidden": false
+        },
+        {
+          "test_name": "clears the input field after adding an item",
+          "is_hidden": false
+        },
+        {
+          "test_name": "does not add empty item when input is blank",
+          "is_hidden": false
+        },
+        {
+          "test_name": "adds multiple items in order",
+          "is_hidden": true
+        },
+        {
+          "test_name": "does not add whitespace-only input",
+          "is_hidden": true
+        },
+        {
+          "test_name": "renders items inside a <ul> element",
+          "is_hidden": true
+        },
+        {
+          "test_name": "can add 10+ items without issue",
+          "is_hidden": true
+        }
+      ]
+    },
+    {
+      "id": "M2",
+      "title": "Code Review Feedback",
+      "difficulty": "Medium",
+      "description": "Create a React application called 'Code Review Feedback' that tracks upvote and downvote counts for five code quality aspects: Readability, Performance, Security, Documentation, and Testing.\n\n### Requirements\n- Display all five aspects with independent 'Upvote' and 'Downvote' buttons.\n- Initial count for upvotes and downvotes for all aspects is `0`.\n- Clicking Upvote increments that aspect's upvote count; Downvote increments its downvote count.\n- Counts must be updated in the UI immediately.",
+      "constraints": [],
+      "starter_code": {
+        "typescript": "import React, { useState } from 'react';\n\nexport default function CodeReviewFeedback() {\n  // Write your code here\n}"
+      },
+      "unit_tests": {
+        "sample_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { render, screen, fireEvent } from \"@testing-library/react\";\nimport CodeReviewFeedback from \"./CodeReviewFeedback\";\nimport React from \"react\";\n\ndescribe(\"M2 - Code Review Feedback (sample)\", () => {\n  it(\"renders all five aspects\", () => {\n    render(<CodeReviewFeedback />);\n    [\"Readability\",\"Performance\",\"Security\",\"Documentation\",\"Testing\"].forEach(a => {\n      expect(screen.getByText(new RegExp(a, \"i\"))).toBeInTheDocument();\n    });\n  });\n  it(\"initial counts are all 0\", () => {\n    render(<CodeReviewFeedback />);\n    const zeros = screen.getAllByText(\"0\");\n    expect(zeros.length).toBeGreaterThanOrEqual(10); // 5 aspects * 2 counts\n  });\n  it(\"increments upvote count for Readability\", () => {\n    render(<CodeReviewFeedback />);\n    const upvoteBtns = screen.getAllByRole(\"button\", { name: /upvote/i });\n    fireEvent.click(upvoteBtns[0]);\n    expect(screen.getAllByText(\"1\").length).toBeGreaterThanOrEqual(1);\n  });\n  it(\"increments downvote count independently\", () => {\n    render(<CodeReviewFeedback />);\n    const downvoteBtns = screen.getAllByRole(\"button\", { name: /downvote/i });\n    fireEvent.click(downvoteBtns[1]); // Performance downvote\n    expect(screen.getAllByText(\"1\").length).toBeGreaterThanOrEqual(1);\n  });\n});",
+        "hidden_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { render, screen, fireEvent } from \"@testing-library/react\";\nimport CodeReviewFeedback from \"./CodeReviewFeedback\";\nimport React from \"react\";\n\ndescribe(\"M2 - Code Review Feedback (hidden)\", () => {\n  it(\"upvote and downvote counts update independently per aspect\", () => {\n    render(<CodeReviewFeedback />);\n    const upBtns = screen.getAllByRole(\"button\", { name: /upvote/i });\n    const downBtns = screen.getAllByRole(\"button\", { name: /downvote/i });\n\n    fireEvent.click(upBtns[2]); // Security upvote\n    fireEvent.click(upBtns[2]);\n    fireEvent.click(downBtns[2]); // Security downvote\n\n    expect(screen.getAllByText(\"2\").length).toBeGreaterThanOrEqual(1);\n    expect(screen.getAllByText(\"1\").length).toBeGreaterThanOrEqual(1);\n  });\n  it(\"clicking upvote 5 times shows count of 5\", () => {\n    render(<CodeReviewFeedback />);\n    const upBtns = screen.getAllByRole(\"button\", { name: /upvote/i });\n    for (let i = 0; i < 5; i++) fireEvent.click(upBtns[0]);\n    expect(screen.getAllByText(\"5\").length).toBeGreaterThanOrEqual(1);\n  });\n  it(\"each aspect has exactly one Upvote and one Downvote button\", () => {\n    render(<CodeReviewFeedback />);\n    expect(screen.getAllByRole(\"button\", { name: /upvote/i })).toHaveLength(5);\n    expect(screen.getAllByRole(\"button\", { name: /downvote/i })).toHaveLength(5);\n  });\n  it(\"counts do not affect sibling aspects\", () => {\n    render(<CodeReviewFeedback />);\n    const upBtns = screen.getAllByRole(\"button\", { name: /upvote/i });\n    fireEvent.click(upBtns[4]); // Testing upvote only\n    expect(screen.getAllByText(\"1\").length).toBe(1);\n  });\n});"
+      },
+      "test_cases_metadata": [
+        {
+          "test_name": "renders all five aspects",
+          "is_hidden": false
+        },
+        {
+          "test_name": "initial counts are all 0",
+          "is_hidden": false
+        },
+        {
+          "test_name": "increments upvote count for Readability",
+          "is_hidden": false
+        },
+        {
+          "test_name": "increments downvote count independently",
+          "is_hidden": false
+        },
+        {
+          "test_name": "upvote and downvote counts update independently per aspect",
+          "is_hidden": true
+        },
+        {
+          "test_name": "clicking upvote 5 times shows count of 5",
+          "is_hidden": true
+        },
+        {
+          "test_name": "each aspect has exactly one Upvote and one Downvote button",
+          "is_hidden": true
+        },
+        {
+          "test_name": "counts do not affect sibling aspects",
+          "is_hidden": true
+        }
+      ]
+    },
+    {
+      "id": "M3",
+      "title": "Contact Form",
+      "difficulty": "Medium",
+      "description": "Create a React application called 'Contact Form' that collects Name, Email, and Message, validates them, and displays submitted data below the form.\n\n### Requirements\n- Fields: Name (text input), Email (text input), Message (textarea).\n- Validate that no fields are empty on submit; show 'All fields are required.' error if any are.\n- On successful submission, display submitted data below the form and clear all fields.\n- Inputs should have clean matching labels (`name`, `email`, `message`).",
+      "constraints": [
+        "Label linkages must be linked via htmlFor or wrapped labels."
+      ],
+      "starter_code": {
+        "typescript": "import React, { useState } from 'react';\n\nexport default function ContactForm() {\n  // Write your code here\n}"
+      },
+      "unit_tests": {
+        "sample_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { render, screen, fireEvent } from \"@testing-library/react\";\nimport ContactForm from \"./ContactForm\";\nimport React from \"react\";\n\ndescribe(\"M3 - Contact Form (sample)\", () => {\n  it(\"renders all form fields and submit button\", () => {\n    render(<ContactForm />);\n    expect(screen.getByLabelText(/name/i)).toBeInTheDocument();\n    expect(screen.getByLabelText(/email/i)).toBeInTheDocument();\n    expect(screen.getByLabelText(/message/i)).toBeInTheDocument();\n    expect(screen.getByRole(\"button\", { name: /submit/i })).toBeInTheDocument();\n  });\n  it(\"shows error when any field is empty\", () => {\n    render(<ContactForm />);\n    fireEvent.click(screen.getByRole(\"button\", { name: /submit/i }));\n    expect(screen.getByText(\"All fields are required.\")).toBeInTheDocument();\n  });\n  it(\"displays submitted data below form on valid submission\", () => {\n    render(<ContactForm />);\n    fireEvent.change(screen.getByLabelText(/name/i), { target: { value: \"John Doe\" } });\n    fireEvent.change(screen.getByLabelText(/email/i), { target: { value: \"john@example.com\" } });\n    fireEvent.change(screen.getByLabelText(/message/i), { target: { value: \"Hello there!\" } });\n    fireEvent.click(screen.getByRole(\"button\", { name: /submit/i }));\n    expect(screen.getByText(\"John Doe\")).toBeInTheDocument();\n    expect(screen.getByText(\"john@example.com\")).toBeInTheDocument();\n  });\n});",
+        "hidden_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { render, screen, fireEvent } from \"@testing-library/react\";\nimport ContactForm from \"./ContactForm\";\nimport React from \"react\";\n\ndescribe(\"M3 - Contact Form (hidden)\", () => {\n  it(\"clears all fields after successful submission\", () => {\n    render(<ContactForm />);\n    fireEvent.change(screen.getByLabelText(/name/i), { target: { value: \"Jane\" } });\n    fireEvent.change(screen.getByLabelText(/email/i), { target: { value: \"jane@test.com\" } });\n    fireEvent.change(screen.getByLabelText(/message/i), { target: { value: \"Hi\" } });\n    fireEvent.click(screen.getByRole(\"button\", { name: /submit/i }));\n\n    expect(screen.getByLabelText(/name/i)).toHaveValue(\"\");\n    expect(screen.getByLabelText(/email/i)).toHaveValue(\"\");\n    expect(screen.getByLabelText(/message/i)).toHaveValue(\"\");\n  });\n  it(\"does not show submitted data if validation fails\", () => {\n    render(<ContactForm />);\n    fireEvent.change(screen.getByLabelText(/name/i), { target: { value: \"John\" } });\n    fireEvent.click(screen.getByRole(\"button\", { name: /submit/i }));\n    expect(screen.queryByText(\"John\")).not.toBeInTheDocument();\n  });\n  it(\"error message disappears after successful submission\", () => {\n    render(<ContactForm />);\n    fireEvent.click(screen.getByRole(\"button\", { name: /submit/i }));\n    expect(screen.getByText(\"All fields are required.\")).toBeInTheDocument();\n\n    fireEvent.change(screen.getByLabelText(/name/i), { target: { value: \"Sam\" } });\n    fireEvent.change(screen.getByLabelText(/email/i), { target: { value: \"s@s.com\" } });\n    fireEvent.change(screen.getByLabelText(/message/i), { target: { value: \"Hi\" } });\n    fireEvent.click(screen.getByRole(\"button\", { name: /submit/i }));\n\n    expect(screen.queryByText(\"All fields are required.\")).not.toBeInTheDocument();\n  });\n});"
+      },
+      "test_cases_metadata": [
+        {
+          "test_name": "renders all form fields and submit button",
+          "is_hidden": false
+        },
+        {
+          "test_name": "shows error when any field is empty",
+          "is_hidden": false
+        },
+        {
+          "test_name": "displays submitted data below form on valid submission",
+          "is_hidden": false
+        },
+        {
+          "test_name": "clears all fields after successful submission",
+          "is_hidden": true
+        },
+        {
+          "test_name": "does not show submitted data if validation fails",
+          "is_hidden": true
+        },
+        {
+          "test_name": "error message disappears after successful submission",
+          "is_hidden": true
+        }
+      ]
+    },
+    {
+      "id": "M4",
+      "title": "Patient Medical Records",
+      "difficulty": "Medium",
+      "description": "Create a React application called 'Patient Medical Records' with two components: Search (dropdown + Show button) and Records (table + Next button). Load 3 patients from `medicalRecords.js`. Cycle through records with the Next button, looping back to the first patient after the last.\n\n### Requirements\n- Dropdown defaults to 'Select Patient' (selected + disabled value). It must contain the 3 patient names dynamically.\n- If 'Show' is clicked without selecting, alert the user: 'Please select a patient name'.\n- Show button displays the selected patient's records in an HTML table with a Next button.\n- Next cycles through patients by ID in ascending order, looping from the last to the first.",
+      "constraints": [],
+      "starter_code": {
+        "typescript": "import React, { useState } from 'react';\n\n// Sample patient data representing what's in medicalRecords.js\nexport const initialPatients = [\n  { id: \"1\", name: \"John Doe\", age: 34, diagnosis: \"Flu\", treatment: \"Rest\" },\n  { id: \"2\", name: \"Jane Smith\", age: 28, diagnosis: \"Gastritis\", treatment: \"Antacids\" },\n  { id: \"3\", name: \"Alice Johnson\", age: 45, diagnosis: \"Migraine\", treatment: \"Painkillers\" }\n];\n\nexport default function App() {\n  // Write your code here\n}"
+      },
+      "unit_tests": {
+        "sample_tests_code": "import { describe, expect, it, vi } from \"vitest\";\nimport { render, screen, fireEvent } from \"@testing-library/react\";\nimport App from \"./App\";\nimport React from \"react\";\n\ndescribe(\"M4 - Patient Medical Records (sample)\", () => {\n  it(\"shows 'Select Patient' as default option\", () => {\n    render(<App />);\n    expect(screen.getByRole(\"option\", { name: /select patient/i })).toBeDisabled();\n  });\n  it(\"alerts when Show clicked without selection\", () => {\n    render(<App />);\n    const alertMock = vi.spyOn(window, \"alert\").mockImplementation(() => {});\n    fireEvent.click(screen.getByRole(\"button\", { name: /show/i }));\n    expect(alertMock).toHaveBeenCalledWith(\"Please select a patient name\");\n    alertMock.mockRestore();\n  });\n  it(\"no records table visible on initial load\", () => {\n    render(<App />);\n    expect(screen.queryByRole(\"table\")).not.toBeInTheDocument();\n  });\n});",
+        "hidden_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { render, screen, fireEvent } from \"@testing-library/react\";\nimport App from \"./App\";\nimport React from \"react\";\n\ndescribe(\"M4 - Patient Medical Records (hidden)\", () => {\n  it(\"shows records table after valid patient selection and Show click\", () => {\n    render(<App />);\n    fireEvent.change(screen.getByRole(\"combobox\"), {\n      target: { value: \"1\" }\n    });\n    fireEvent.click(screen.getByRole(\"button\", { name: /show/i }));\n    expect(screen.getByRole(\"table\")).toBeInTheDocument();\n    expect(screen.getByRole(\"button\", { name: /next/i })).toBeInTheDocument();\n  });\n  it(\"Next button shows next patient's records\", () => {\n    render(<App />);\n    fireEvent.change(screen.getByRole(\"combobox\"), { target: { value: \"1\" } });\n    fireEvent.click(screen.getByRole(\"button\", { name: /show/i }));\n    const firstName = screen.getByRole(\"table\").textContent;\n    fireEvent.click(screen.getByRole(\"button\", { name: /next/i }));\n    expect(screen.getByRole(\"table\").textContent).not.toBe(firstName);\n  });\n  it(\"Next loops back to first patient after last\", () => {\n    render(<App />);\n    fireEvent.change(screen.getByRole(\"combobox\"), { target: { value: \"1\" } });\n    fireEvent.click(screen.getByRole(\"button\", { name: /show/i }));\n    const firstContent = screen.getByRole(\"table\").textContent;\n    fireEvent.click(screen.getByRole(\"button\", { name: /next/i }));\n    fireEvent.click(screen.getByRole(\"button\", { name: /next/i }));\n    fireEvent.click(screen.getByRole(\"button\", { name: /next/i }));\n    expect(screen.getByRole(\"table\").textContent).toBe(firstContent);\n  });\n  it(\"dropdown contains exactly 3 patient options plus placeholder\", () => {\n    render(<App />);\n    const options = screen.getAllByRole(\"option\");\n    expect(options).toHaveLength(4); // 1 placeholder + 3 patients\n  });\n});"
+      },
+      "test_cases_metadata": [
+        {
+          "test_name": "shows 'Select Patient' as default option",
+          "is_hidden": false
+        },
+        {
+          "test_name": "alerts when Show clicked without selection",
+          "is_hidden": false
+        },
+        {
+          "test_name": "no records table visible on initial load",
+          "is_hidden": false
+        },
+        {
+          "test_name": "shows records table after valid patient selection and Show click",
+          "is_hidden": true
+        },
+        {
+          "test_name": "Next button shows next patient's records",
+          "is_hidden": true
+        },
+        {
+          "test_name": "Next loops back to first patient after last",
+          "is_hidden": true
+        },
+        {
+          "test_name": "dropdown contains exactly 3 patient options plus placeholder",
+          "is_hidden": true
+        }
+      ]
+    },
+    {
+      "id": "M5",
+      "title": "Blog Post Manager",
+      "difficulty": "Medium",
+      "description": "Create a React application called 'Blog Post' allowing users to create, display, and delete blog posts. Posts appear in a grid layout, each inside a box (post-card) with a title, description, and Delete button.\n\n### Requirements\n- Two inputs: title (text) and description (textarea).\n- 'Create' button adds a post only if both fields have values.\n- After creation, both inputs are cleared.\n- Each post card displays the title, description, and a 'Delete' button to remove it.",
+      "constraints": [],
+      "starter_code": {
+        "typescript": "import React, { useState } from 'react';\n\nexport default function BlogPost() {\n  // Write your code here\n}"
+      },
+      "unit_tests": {
+        "sample_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { render, screen, fireEvent } from \"@testing-library/react\";\nimport BlogPost from \"./BlogPost\";\nimport React from \"react\";\n\ndescribe(\"M5 - Blog Post (sample)\", () => {\n  it(\"renders title input, description textarea, and Create button\", () => {\n    render(<BlogPost />);\n    expect(screen.getByPlaceholderText(/title/i)).toBeInTheDocument();\n    expect(screen.getByPlaceholderText(/description/i)).toBeInTheDocument();\n    expect(screen.getByRole(\"button\", { name: /create/i })).toBeInTheDocument();\n  });\n  it(\"creates a post and displays it\", () => {\n    render(<BlogPost />);\n    fireEvent.change(screen.getByPlaceholderText(/title/i), { target: { value: \"My Post\" } });\n    fireEvent.change(screen.getByPlaceholderText(/description/i), { target: { value: \"My Desc\" } });\n    fireEvent.click(screen.getByRole(\"button\", { name: /create/i }));\n    expect(screen.getByText(\"My Post\")).toBeInTheDocument();\n  });\n  it(\"does not create post if title is empty\", () => {\n    render(<BlogPost />);\n    fireEvent.change(screen.getByPlaceholderText(/description/i), { target: { value: \"Desc\" } });\n    fireEvent.click(screen.getByRole(\"button\", { name: /create/i }));\n    expect(screen.queryByText(\"Desc\")).not.toBeInTheDocument();\n  });\n  it(\"Delete button removes a post\", () => {\n    render(<BlogPost />);\n    fireEvent.change(screen.getByPlaceholderText(/title/i), { target: { value: \"ToDelete\" } });\n    fireEvent.change(screen.getByPlaceholderText(/description/i), { target: { value: \"Desc\" } });\n    fireEvent.click(screen.getByRole(\"button\", { name: /create/i }));\n    fireEvent.click(screen.getByRole(\"button\", { name: /delete/i }));\n    expect(screen.queryByText(\"ToDelete\")).not.toBeInTheDocument();\n  });\n});",
+        "hidden_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { render, screen, fireEvent } from \"@testing-library/react\";\nimport BlogPost from \"./BlogPost\";\nimport React from \"react\";\n\ndescribe(\"M5 - Blog Post (hidden)\", () => {\n  it(\"clears inputs after post creation\", () => {\n    render(<BlogPost />);\n    const titleInput = screen.getByPlaceholderText(/title/i);\n    const descInput = screen.getByPlaceholderText(/description/i);\n\n    fireEvent.change(titleInput, { target: { value: \"T\" } });\n    fireEvent.change(descInput, { target: { value: \"D\" } });\n    fireEvent.click(screen.getByRole(\"button\", { name: /create/i }));\n\n    expect(titleInput).toHaveValue(\"\");\n    expect(descInput).toHaveValue(\"\");\n  });\n  it(\"does not create post if description is empty\", () => {\n    render(<BlogPost />);\n    fireEvent.change(screen.getByPlaceholderText(/title/i), { target: { value: \"Title\" } });\n    fireEvent.click(screen.getByRole(\"button\", { name: /create/i }));\n    expect(screen.queryByPlaceholderText(/description/i)).toHaveValue(\"\");\n    expect(screen.queryAllByRole(\"button\", { name: /delete/i })).toHaveLength(0);\n  });\n  it(\"deleting one post does not affect others\", () => {\n    render(<BlogPost />);\n    [\"Post A\", \"Post B\"].forEach(title => {\n      fireEvent.change(screen.getByPlaceholderText(/title/i), { target: { value: title } });\n      fireEvent.change(screen.getByPlaceholderText(/description/i), { target: { value: \"Desc\" } });\n      fireEvent.click(screen.getByRole(\"button\", { name: /create/i }));\n    });\n    const deleteBtns = screen.getAllByRole(\"button\", { name: /delete/i });\n    fireEvent.click(deleteBtns[0]);\n\n    expect(screen.queryByText(\"Post A\")).not.toBeInTheDocument();\n    expect(screen.getByText(\"Post B\")).toBeInTheDocument();\n  });\n});"
+      },
+      "test_cases_metadata": [
+        {
+          "test_name": "renders title input, description textarea, and Create button",
+          "is_hidden": false
+        },
+        {
+          "test_name": "creates a post and displays it",
+          "is_hidden": false
+        },
+        {
+          "test_name": "does not create post if title is empty",
+          "is_hidden": false
+        },
+        {
+          "test_name": "Delete button removes a post",
+          "is_hidden": false
+        },
+        {
+          "test_name": "clears inputs after post creation",
+          "is_hidden": true
+        },
+        {
+          "test_name": "does not create post if description is empty",
+          "is_hidden": true
+        },
+        {
+          "test_name": "deleting one post does not affect others",
+          "is_hidden": true
+        }
+      ]
+    },
+    {
+      "id": "M6",
+      "title": "Basic Slideshow",
+      "difficulty": "Medium",
+      "description": "Create a React 'Basic Slideshow' component that takes a `slides` prop (array of `{title, text}` objects) and supports Next, Prev, and Restart navigation. \n\n### Requirements\n- Prev and Restart buttons are disabled on the first slide.\n- Next button is disabled on the last slide.\n- Next advances the slide, Prev retreats to the previous slide, and Restart takes you back to the very first slide.",
+      "constraints": [],
+      "starter_code": {
+        "typescript": "import React, { useState } from 'react';\n\nexport interface Slide {\n  title: string;\n  text: string;\n}\n\nexport default function Slides({ slides }: { slides: Slide[] }) {\n  // Write your code here\n}"
+      },
+      "unit_tests": {
+        "sample_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { render, screen, fireEvent } from \"@testing-library/react\";\nimport Slides from \"./Slides\";\nimport React from \"react\";\n\nconst slides = [\n  { title: \"Slide 1\", text: \"Content 1\" },\n  { title: \"Slide 2\", text: \"Content 2\" },\n  { title: \"Slide 3\", text: \"Content 3\" },\n];\n\ndescribe(\"M6 - Slideshow (sample)\", () => {\n  it(\"renders first slide on load\", () => {\n    render(<Slides slides={slides} />);\n    expect(screen.getByText(\"Slide 1\")).toBeInTheDocument();\n  });\n  it(\"Prev and Restart are disabled on first slide\", () => {\n    render(<Slides slides={slides} />);\n    expect(screen.getByRole(\"button\", { name: /prev/i })).toBeDisabled();\n    expect(screen.getByRole(\"button\", { name: /restart/i })).toBeDisabled();\n  });\n  it(\"Next advances to second slide\", () => {\n    render(<Slides slides={slides} />);\n    fireEvent.click(screen.getByRole(\"button\", { name: /next/i }));\n    expect(screen.getByText(\"Slide 2\")).toBeInTheDocument();\n  });\n  it(\"Next is disabled on last slide\", () => {\n    render(<Slides slides={slides} />);\n    fireEvent.click(screen.getByRole(\"button\", { name: /next/i }));\n    fireEvent.click(screen.getByRole(\"button\", { name: /next/i }));\n    expect(screen.getByRole(\"button\", { name: /next/i })).toBeDisabled();\n  });\n});",
+        "hidden_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { render, screen, fireEvent } from \"@testing-library/react\";\nimport Slides from \"./Slides\";\nimport React from \"react\";\n\nconst slides = [\n  { title: \"S1\", text: \"T1\" },\n  { title: \"S2\", text: \"T2\" },\n  { title: \"S3\", text: \"T3\" },\n];\n\ndescribe(\"M6 - Slideshow (hidden)\", () => {\n  it(\"Restart returns to first slide from any position\", () => {\n    render(<Slides slides={slides} />);\n    fireEvent.click(screen.getByRole(\"button\", { name: /next/i }));\n    fireEvent.click(screen.getByRole(\"button\", { name: /next/i }));\n    fireEvent.click(screen.getByRole(\"button\", { name: /restart/i }));\n    expect(screen.getByText(\"S1\")).toBeInTheDocument();\n  });\n  it(\"Prev goes back to previous slide\", () => {\n    render(<Slides slides={slides} />);\n    fireEvent.click(screen.getByRole(\"button\", { name: /next/i }));\n    fireEvent.click(screen.getByRole(\"button\", { name: /prev/i }));\n    expect(screen.getByText(\"S1\")).toBeInTheDocument();\n  });\n  it(\"Prev and Restart enabled after advancing from first slide\", () => {\n    render(<Slides slides={slides} />);\n    fireEvent.click(screen.getByRole(\"button\", { name: /next/i }));\n    expect(screen.getByRole(\"button\", { name: /prev/i })).not.toBeDisabled();\n    expect(screen.getByRole(\"button\", { name: /restart/i })).not.toBeDisabled();\n  });\n  it(\"single-slide deck disables Next, Prev, and Restart\", () => {\n    render(<Slides slides={[{ title: \"Only\", text: \"One\" }]} />);\n    expect(screen.getByRole(\"button\", { name: /next/i })).toBeDisabled();\n    expect(screen.getByRole(\"button\", { name: /prev/i })).toBeDisabled();\n    expect(screen.getByRole(\"button\", { name: /restart/i })).toBeDisabled();\n  });\n});"
+      },
+      "test_cases_metadata": [
+        {
+          "test_name": "renders first slide on load",
+          "is_hidden": false
+        },
+        {
+          "test_name": "Prev and Restart are disabled on first slide",
+          "is_hidden": false
+        },
+        {
+          "test_name": "Next advances to second slide",
+          "is_hidden": false
+        },
+        {
+          "test_name": "Next is disabled on last slide",
+          "is_hidden": false
+        },
+        {
+          "test_name": "Restart returns to first slide from any position",
+          "is_hidden": true
+        },
+        {
+          "test_name": "Prev goes back to previous slide",
+          "is_hidden": true
+        },
+        {
+          "test_name": "Prev and Restart enabled after advancing from first slide",
+          "is_hidden": true
+        },
+        {
+          "test_name": "single-slide deck disables Next, Prev, and Restart",
+          "is_hidden": true
+        }
+      ]
+    },
+    {
+      "id": "M7",
+      "title": "Employee Validation Form",
+      "difficulty": "Medium",
+      "description": "Create a React app with an `EmployeeValidationForm` component collecting Name, Email, Employee ID, and Joining Date — each with inline validation. Submit is disabled until all fields are valid.\n\n### Validation Rules\n1. **Name**: At least 4 characters, only letters and spaces.\n2. **Email**: Valid email format.\n3. **Employee ID**: Exactly 6 numeric digits.\n4. **Joining Date**: Must not be a future date.",
+      "constraints": [],
+      "starter_code": {
+        "typescript": "import React, { useState } from 'react';\n\nexport default function EmployeeValidationForm() {\n  // Write your code here\n}"
+      },
+      "unit_tests": {
+        "sample_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { render, screen, fireEvent } from \"@testing-library/react\";\nimport EmployeeValidationForm from \"./EmployeeValidationForm\";\nimport React from \"react\";\n\ndescribe(\"M7 - Employee Validation Form (sample)\", () => {\n  it(\"submit button is disabled initially\", () => {\n    render(<EmployeeValidationForm />);\n    expect(screen.getByRole(\"button\", { name: /submit/i })).toBeDisabled();\n  });\n  it(\"shows name error for short name\", () => {\n    render(<EmployeeValidationForm />);\n    fireEvent.change(screen.getByLabelText(/name/i), { target: { value: \"AB\" } });\n    expect(screen.getByText(/at least 4 characters/i)).toBeInTheDocument();\n  });\n  it(\"shows email error for invalid format\", () => {\n    render(<EmployeeValidationForm />);\n    fireEvent.change(screen.getByLabelText(/email/i), { target: { value: \"notanemail\" } });\n    expect(screen.getByText(/valid email/i)).toBeInTheDocument();\n  });\n  it(\"shows employee ID error for non-6-digit input\", () => {\n    render(<EmployeeValidationForm />);\n    fireEvent.change(screen.getByLabelText(/employee id/i), { target: { value: \"123\" } });\n    expect(screen.getByText(/exactly 6 digits/i)).toBeInTheDocument();\n  });\n});",
+        "hidden_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { render, screen, fireEvent } from \"@testing-library/react\";\nimport EmployeeValidationForm from \"./EmployeeValidationForm\";\nimport React from \"react\";\n\ndescribe(\"M7 - Employee Validation Form (hidden)\", () => {\n  it(\"submit enabled when all fields valid\", () => {\n    render(<EmployeeValidationForm />);\n    fireEvent.change(screen.getByLabelText(/name/i), { target: { value: \"John Doe\" } });\n    fireEvent.change(screen.getByLabelText(/email/i), { target: { value: \"j@j.com\" } });\n    fireEvent.change(screen.getByLabelText(/employee id/i), { target: { value: \"123456\" } });\n    fireEvent.change(screen.getByLabelText(/joining date/i), { target: { value: \"2020-01-01\" } });\n    expect(screen.getByRole(\"button\", { name: /submit/i })).not.toBeDisabled();\n  });\n  it(\"resets form after submission\", () => {\n    render(<EmployeeValidationForm />);\n    fireEvent.change(screen.getByLabelText(/name/i), { target: { value: \"John Doe\" } });\n    fireEvent.change(screen.getByLabelText(/email/i), { target: { value: \"j@j.com\" } });\n    fireEvent.change(screen.getByLabelText(/employee id/i), { target: { value: \"123456\" } });\n    fireEvent.change(screen.getByLabelText(/joining date/i), { target: { value: \"2020-01-01\" } });\n    fireEvent.click(screen.getByRole(\"button\", { name: /submit/i }));\n    expect(screen.getByLabelText(/name/i)).toHaveValue(\"\");\n  });\n  it(\"rejects name with numbers\", () => {\n    render(<EmployeeValidationForm />);\n    fireEvent.change(screen.getByLabelText(/name/i), { target: { value: \"John1\" } });\n    expect(screen.getByText(/only contain letters and spaces/i)).toBeInTheDocument();\n  });\n  it(\"rejects future joining date\", () => {\n    render(<EmployeeValidationForm />);\n    fireEvent.change(screen.getByLabelText(/joining date/i), { target: { value: \"2099-01-01\" } });\n    expect(screen.getByText(/cannot be in the future/i)).toBeInTheDocument();\n  });\n});"
+      },
+      "test_cases_metadata": [
+        {
+          "test_name": "submit button is disabled initially",
+          "is_hidden": false
+        },
+        {
+          "test_name": "shows name error for short name",
+          "is_hidden": false
+        },
+        {
+          "test_name": "shows email error for invalid format",
+          "is_hidden": false
+        },
+        {
+          "test_name": "shows employee ID error for non-6-digit input",
+          "is_hidden": false
+        },
+        {
+          "test_name": "submit enabled when all fields valid",
+          "is_hidden": true
+        },
+        {
+          "test_name": "resets form after submission",
+          "is_hidden": true
+        },
+        {
+          "test_name": "rejects name with numbers",
+          "is_hidden": true
+        },
+        {
+          "test_name": "rejects future joining date",
+          "is_hidden": true
+        }
+      ]
+    },
+    {
+      "id": "M8",
+      "title": "CryptoRank Exchange",
+      "difficulty": "Medium",
+      "description": "Build a 'CryptoRank Exchange' React app that estimates cryptocurrency coins received for a given fiat amount. Show a table of Exchange Rate and Number of Coins. Validate amount against available balance.\n\n### Conversion Formula\n`Number of Coins = Amount * Exchange Rate` (round/format to 8 decimal places)\n\n### Form Inputs\n- An input (type: `spinbutton` or `number`) for selecting/specifying currency amount.\n\n### Error messages\n- Empty input: 'Amount cannot be empty'\n- Amount < 0.01: 'Amount cannot be less than 0.01'\n- Amount > balance: 'Amount cannot exceed the available balance'\nAll coins show 'n/a' when inputs are invalid.",
+      "constraints": [],
+      "starter_code": {
+        "typescript": "import React, { useState } from 'react';\n\nexport default function CryptoRankExchange({ balance = 500 }: { balance?: number }) {\n  // Write your code here\n}"
+      },
+      "unit_tests": {
+        "sample_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { render, screen, fireEvent } from \"@testing-library/react\";\nimport CryptoRankExchange from \"./CryptoRankExchange\";\nimport React from \"react\";\n\ndescribe(\"M8 - CryptoRank Exchange (sample)\", () => {\n  it(\"shows 0.00000000 by default for all coins\", () => {\n    render(<CryptoRankExchange />);\n    const zeros = screen.getAllByText(\"0.00000000\");\n    expect(zeros.length).toBeGreaterThanOrEqual(1);\n  });\n  it(\"shows error for empty input\", () => {\n    render(<CryptoRankExchange />);\n    const input = screen.getByRole(\"spinbutton\");\n    fireEvent.change(input, { target: { value: \"\" } });\n    expect(screen.getByText(\"Amount cannot be empty\")).toBeInTheDocument();\n  });\n  it(\"shows error when amount below 0.01\", () => {\n    render(<CryptoRankExchange />);\n    fireEvent.change(screen.getByRole(\"spinbutton\"), { target: { value: \"0.001\" } });\n    expect(screen.getByText(\"Amount cannot be less than 0.01\")).toBeInTheDocument();\n  });\n});",
+        "hidden_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { render, screen, fireEvent } from \"@testing-library/react\";\nimport CryptoRankExchange from \"./CryptoRankExchange\";\nimport React from \"react\";\n\ndescribe(\"M8 - CryptoRank Exchange (hidden)\", () => {\n  it(\"shows n/a for all coins on invalid amount\", () => {\n    render(<CryptoRankExchange />);\n    fireEvent.change(screen.getByRole(\"spinbutton\"), { target: { value: \"999999\" } });\n    const nas = screen.getAllByText(\"n/a\");\n    expect(nas.length).toBeGreaterThanOrEqual(1);\n  });\n  it(\"calculates coins to 8 decimal places for valid amount\", () => {\n    render(<CryptoRankExchange />);\n    fireEvent.change(screen.getByRole(\"spinbutton\"), { target: { value: \"100\" } });\n    const coinValues = screen.queryAllByText(/^\\d+\\.\\d{8}$/);\n    expect(coinValues.length).toBeGreaterThanOrEqual(1);\n  });\n  it(\"table updates dynamically as amount changes\", () => {\n    render(<CryptoRankExchange />);\n    const input = screen.getByRole(\"spinbutton\");\n    fireEvent.change(input, { target: { value: \"50\" } });\n    const val50 = screen.queryAllByText(/^\\d+\\.\\d{8}$/);\n    fireEvent.change(input, { target: { value: \"100\" } });\n    const val100 = screen.queryAllByText(/^\\d+\\.\\d{8}$/);\n    expect(val50[0]?.textContent).not.toBe(val100[0]?.textContent);\n  });\n  it(\"error message for exceeding balance\", () => {\n    render(<CryptoRankExchange balance={500} />);\n    fireEvent.change(screen.getByRole(\"spinbutton\"), { target: { value: \"501\" } });\n    expect(screen.getByText(\"Amount cannot exceed the available balance\")).toBeInTheDocument();\n  });\n});"
+      },
+      "test_cases_metadata": [
+        {
+          "test_name": "shows 0.00000000 by default for all coins",
+          "is_hidden": false
+        },
+        {
+          "test_name": "shows error for empty input",
+          "is_hidden": false
+        },
+        {
+          "test_name": "shows error when amount below 0.01",
+          "is_hidden": false
+        },
+        {
+          "test_name": "shows n/a for all coins on invalid amount",
+          "is_hidden": true
+        },
+        {
+          "test_name": "calculates coins to 8 decimal places for valid amount",
+          "is_hidden": true
+        },
+        {
+          "test_name": "table updates dynamically as amount changes",
+          "is_hidden": true
+        },
+        {
+          "test_name": "error message for exceeding balance",
+          "is_hidden": true
+        }
+      ]
+    },
+    {
+      "id": "M9",
+      "title": "useQuery Custom Hook",
+      "difficulty": "Medium",
+      "description": "Implement a custom React Hook `useQuery<T>` that manages query executions, load states, error capture, and data storage for custom promises.\n\n### Signature\n```ts\nfunction useQuery<T>(\n  fn: () => Promise<T>,\n  deps: DependencyList = []\n): QueryResult<T>\n```\n\n### Returns one of:\n- `{ status: \"loading\" }`\n- `{ status: \"error\"; error: Error }`\n- `{ status: \"success\"; data: T }`",
+      "constraints": [],
+      "starter_code": {
+        "typescript": "import { DependencyList, useState, useEffect } from 'react';\n\nexport type QueryResult<T> =\n  | { status: 'loading' }\n  | { status: 'error'; error: Error }\n  | { status: 'success'; data: T };\n\nexport function useQuery<T>(fn: () => Promise<T>, deps: DependencyList = []): QueryResult<T> {\n  // Write your code here\n}"
+      },
+      "unit_tests": {
+        "sample_tests_code": "import { describe, expect, it, vi } from \"vitest\";\nimport { renderHook, waitFor } from \"@testing-library/react\";\nimport { useQuery } from \"./useQuery\";\n\ndescribe(\"M9 - useQuery (sample)\", () => {\n  it(\"returns loading status initially\", () => {\n    const { result } = renderHook(() =>\n      useQuery(() => new Promise(() => {}))\n    );\n    expect(result.current.status).toBe(\"loading\");\n  });\n  it(\"returns success status with data on resolution\", async () => {\n    const { result } = renderHook(() =>\n      useQuery(() => Promise.resolve(42))\n    );\n    await waitFor(() => expect(result.current.status).toBe(\"success\"));\n    if (result.current.status === \"success\") {\n      expect(result.current.data).toBe(42);\n    }\n  });\n  it(\"returns error status on rejection\", async () => {\n    const { result } = renderHook(() =>\n      useQuery(() => Promise.reject(new Error(\"Oops\")))\n    );\n    await waitFor(() => expect(result.current.status).toBe(\"error\"));\n    if (result.current.status === \"error\") {\n      expect(result.current.error.message).toBe(\"Oops\");\n    }\n  });\n});",
+        "hidden_tests_code": "import { describe, expect, it, vi } from \"vitest\";\nimport { renderHook, waitFor, act } from \"@testing-library/react\";\nimport { useQuery } from \"./useQuery\";\n\ndescribe(\"M9 - useQuery (hidden)\", () => {\n  it(\"re-runs fn when deps change\", async () => {\n    let count = 0;\n    const fn = vi.fn(() => Promise.resolve(++count));\n    const { result, rerender } = renderHook(\n      ({ id }) => useQuery(() => fn(), [id]),\n      { initialProps: { id: 1 } }\n    );\n    await waitFor(() => expect(result.current.status).toBe(\"success\"));\n    rerender({ id: 2 });\n    await waitFor(() => {\n      if (result.current.status === \"success\") expect(result.current.data).toBe(2);\n    });\n    expect(fn).toHaveBeenCalledTimes(2);\n  });\n  it(\"does not update state for stale async responses\", async () => {\n    let resolve1!: (v: number) => void;\n    let resolve2!: (v: number) => void;\n    const { result, rerender } = renderHook(\n      ({ id }) => useQuery(\n        () => id === 1 ? new Promise(r => { resolve1 = r; }) : new Promise(r => { resolve2 = r; }),\n        [id]\n      ),\n      { initialProps: { id: 1 } }\n    );\n    rerender({ id: 2 });\n    act(() => { resolve2(200); });\n    await waitFor(() => expect(result.current.status).toBe(\"success\"));\n    act(() => { resolve1(100); }); // stale response\n    await new Promise(r => setTimeout(r, 50));\n    if (result.current.status === \"success\") expect(result.current.data).toBe(200);\n  });\n  it(\"defaults deps to [] and runs only once without deps\", async () => {\n    const fn = vi.fn(() => Promise.resolve(\"ok\"));\n    const { rerender } = renderHook(() => useQuery(fn));\n    rerender();\n    await new Promise(r => setTimeout(r, 50));\n    expect(fn).toHaveBeenCalledTimes(1);\n  });\n});"
+      },
+      "test_cases_metadata": [
+        {
+          "test_name": "returns loading status initially",
+          "is_hidden": false
+        },
+        {
+          "test_name": "returns success status with data on resolution",
+          "is_hidden": false
+        },
+        {
+          "test_name": "returns error status on rejection",
+          "is_hidden": false
+        },
+        {
+          "test_name": "re-runs fn when deps change",
+          "is_hidden": true
+        },
+        {
+          "test_name": "does not update state for stale async responses",
+          "is_hidden": true
+        },
+        {
+          "test_name": "defaults deps to [] and runs only once without deps",
+          "is_hidden": true
+        }
+      ]
+    },
+    {
+      "id": "M10",
+      "title": "useArray Custom Hook",
+      "difficulty": "Medium",
+      "description": "Implement a custom React Hook `useArray` that manages dynamic array state modifications with utility helpers.\n\n### Provided Methods\n1. `push(item)`: Appends an item to the end of the array.\n2. `update(index, item)`: Replaces element at specified index.\n3. `remove(index)`: Removes item at specific index (out-of-bounds must not throw errors).\n4. `filter(callback)`: Filters the elements containing a condition.\n5. `set(newArray)`: Replaces the entire array.\n6. `clear()`: Empties the array.\nAll updates must immediately refresh references.",
+      "constraints": [],
+      "starter_code": {
+        "typescript": "import { useState } from 'react';\n\nexport function useArray<T>(initialValue: T[] = []) {\n  // Write your code here\n}"
+      },
+      "unit_tests": {
+        "sample_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { renderHook, act } from \"@testing-library/react\";\nimport { useArray } from \"./useArray\";\n\ndescribe(\"M10 - useArray (sample)\", () => {\n  it(\"initializes with default value\", () => {\n    const { result } = renderHook(() => useArray([\"apple\", \"banana\"]));\n    expect(result.current.array).toEqual([\"apple\", \"banana\"]);\n  });\n  it(\"push adds item to end\", () => {\n    const { result } = renderHook(() => useArray<string>([]));\n    act(() => result.current.push(\"orange\"));\n    expect(result.current.array).toEqual([\"orange\"]);\n  });\n  it(\"remove removes item at index\", () => {\n    const { result } = renderHook(() => useArray([\"a\",\"b\",\"c\"]));\n    act(() => result.current.remove(1));\n    expect(result.current.array).toEqual([\"a\",\"c\"]);\n  });\n  it(\"clear empties the array\", () => {\n    const { result } = renderHook(() => useArray([1,2,3]));\n    act(() => result.current.clear());\n    expect(result.current.array).toEqual([]);\n  });\n});",
+        "hidden_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { renderHook, act } from \"@testing-library/react\";\nimport { useArray } from \"./useArray\";\n\ndescribe(\"M10 - useArray (hidden)\", () => {\n  it(\"update replaces element at index\", () => {\n    const { result } = renderHook(() => useArray([\"apple\",\"banana\"]));\n    act(() => result.current.update(1, \"grape\"));\n    expect(result.current.array).toEqual([\"apple\",\"grape\"]);\n  });\n  it(\"filter retains only matching elements\", () => {\n    const { result } = renderHook(() => useArray([\"apple\",\"banana\",\"avocado\"]));\n    act(() => result.current.filter(f => f.includes(\"a\")));\n    expect(result.current.array).toEqual([\"apple\",\"banana\",\"avocado\"]);\n  });\n  it(\"set replaces entire array\", () => {\n    const { result } = renderHook(() => useArray([1,2,3]));\n    act(() => result.current.set([10,20]));\n    expect(result.current.array).toEqual([10,20]);\n  });\n  it(\"push to empty array creates single-element array\", () => {\n    const { result } = renderHook(() => useArray<number>([]));\n    act(() => result.current.push(99));\n    expect(result.current.array).toHaveLength(1);\n    expect(result.current.array[0]).toBe(99);\n  });\n  it(\"remove at out-of-bounds index does not throw\", () => {\n    const { result } = renderHook(() => useArray([1,2]));\n    expect(() => act(() => result.current.remove(10))).not.toThrow();\n  });\n});"
+      },
+      "test_cases_metadata": [
+        {
+          "test_name": "initializes with default value",
+          "is_hidden": false
+        },
+        {
+          "test_name": "push adds item to end",
+          "is_hidden": false
+        },
+        {
+          "test_name": "remove removes item at index",
+          "is_hidden": false
+        },
+        {
+          "test_name": "clear empties the array",
+          "is_hidden": false
+        },
+        {
+          "test_name": "update replaces element at index",
+          "is_hidden": true
+        },
+        {
+          "test_name": "filter retains only matching elements",
+          "is_hidden": true
+        },
+        {
+          "test_name": "set replaces entire array",
+          "is_hidden": true
+        },
+        {
+          "test_name": "push to empty array creates single-element array",
+          "is_hidden": true
+        },
+        {
+          "test_name": "remove at out-of-bounds index does not throw",
+          "is_hidden": true
+        }
+      ]
+    },
+    {
+      "id": "H1",
+      "title": "Debounce Function",
+      "difficulty": "Hard",
+      "description": "Implement a fully featured robust `debounce` function. Debouncing delays a function call until a specified amount of time (`delay`) has elapsed since the last time the debounced function was invoked.\n\n### Requirements\n- The returned function must allow passing variables and returning results/triggering handlers.\n- It must support a `cancel` method to reset the pending execution timer.",
+      "constraints": [],
+      "starter_code": {
+        "typescript": "export function debounce<T extends (...args: any[]) => void>(\n  fn: T,\n  delay: number\n): ((...args: Parameters<T>) => void) & { cancel: () => void } {\n  // Write your code here\n}"
+      },
+      "unit_tests": {
+        "sample_tests_code": "import { describe, expect, it, vi } from \"vitest\";\nimport { debounce } from \"./solution\";\n\ndescribe(\"H1 - Debounce Function (sample)\", () => {\n  it(\"delays executing the target function\", async () => {\n    const fn = vi.fn();\n    const debounced = debounce(fn, 50);\n    debounced();\n    expect(fn).toHaveBeenCalledTimes(0);\n    await new Promise(r => setTimeout(r, 60));\n    expect(fn).toHaveBeenCalledTimes(1);\n  });\n  it(\"combines multiple fast successive calls into one\", async () => {\n    const fn = vi.fn();\n    const debounced = debounce(fn, 55);\n    debounced(\"a\");\n    debounced(\"b\");\n    debounced(\"c\");\n    await new Promise(r => setTimeout(r, 65));\n    expect(fn).toHaveBeenCalledTimes(1);\n    expect(fn).toHaveBeenCalledWith(\"c\");\n  });\n  it(\"cancel resets state and stops pending trigger\", async () => {\n    const fn = vi.fn();\n    const debounced = debounce(fn, 40);\n    debounced();\n    debounced.cancel();\n    await new Promise(r => setTimeout(r, 50));\n    expect(fn).not.toHaveBeenCalled();\n  });\n});",
+        "hidden_tests_code": "import { describe, expect, it, vi } from \"vitest\";\nimport { debounce } from \"./solution\";\n\ndescribe(\"H1 - Debounce Function (hidden)\", () => {\n  it(\"correctly forwards 'this' execution context and multiple arguments\", async () => {\n    const fn = vi.fn();\n    const debounced = debounce(fn, 10);\n    debounced(\"foo\", \"bar\");\n    await new Promise(r => setTimeout(r, 15));\n    expect(fn).toHaveBeenCalledWith(\"foo\", \"bar\");\n  });\n  it(\"can execute multiple times if calls are spaced apart widely\", async () => {\n    const fn = vi.fn();\n    const debounced = debounce(fn, 10);\n    debounced(1);\n    await new Promise(r => setTimeout(r, 15));\n    debounced(2);\n    await new Promise(r => setTimeout(r, 15));\n    expect(fn).toHaveBeenCalledTimes(2);\n  });\n  it(\"allows setting cancel multiple times safely\", () => {\n    const fn = vi.fn();\n    const debounced = debounce(fn, 10);\n    expect(() => {\n      debounced.cancel();\n      debounced.cancel();\n    }).not.toThrow();\n  });\n  it(\"does not mix separate debounce function instances\", async () => {\n    const fn1 = vi.fn();\n    const fn2 = vi.fn();\n    const deb1 = debounce(fn1, 10);\n    const deb2 = debounce(fn2, 10);\n    deb1();\n    await new Promise(r => setTimeout(r, 15));\n    expect(fn1).toHaveBeenCalledTimes(1);\n    expect(fn2).not.toHaveBeenCalled();\n  });\n});"
+      },
+      "test_cases_metadata": [
+        {
+          "test_name": "delays executing the target function",
+          "is_hidden": false
+        },
+        {
+          "test_name": "combines multiple fast successive calls into one",
+          "is_hidden": false
+        },
+        {
+          "test_name": "cancel resets state and stops pending trigger",
+          "is_hidden": false
+        },
+        {
+          "test_name": "correctly forwards 'this' execution context and multiple arguments",
+          "is_hidden": true
+        },
+        {
+          "test_name": "can execute multiple times if calls are spaced apart widely",
+          "is_hidden": true
+        },
+        {
+          "test_name": "allows setting cancel multiple times safely",
+          "is_hidden": true
+        },
+        {
+          "test_name": "does not mix separate debounce function instances",
+          "is_hidden": true
+        }
+      ]
+    },
+    {
+      "id": "H2",
+      "title": "Throttle Function",
+      "difficulty": "Hard",
+      "description": "Implement a fully featured robust `throttle` function. Throttling ensures that a target function is executed at most once per a defined time interval (`limit`).\n\n### Requirements\n- The returned function must allow passing arguments and forwarding execution contexts.\n- Any execution trigger occurring during the throttled interval must be run strictly at the end of the current period.",
+      "constraints": [],
+      "starter_code": {
+        "typescript": "export function throttle<T extends (...args: any[]) => void>(\n  fn: T,\n  limit: number\n): (...args: Parameters<T>) => void {\n  // Write your code here\n}"
+      },
+      "unit_tests": {
+        "sample_tests_code": "import { describe, expect, it, vi } from \"vitest\";\nimport { throttle } from \"./solution\";\n\ndescribe(\"H2 - Throttle Function (sample)\", () => {\n  it(\"executes immediately on first call and limits further triggers\", async () => {\n    const fn = vi.fn();\n    const throttled = throttle(fn, 100);\n    throttled();\n    throttled();\n    throttled();\n    expect(fn).toHaveBeenCalledTimes(1);\n  });\n  it(\"safely triggers trailing calls at end of throttle boundary\", async () => {\n    const fn = vi.fn();\n    const throttled = throttle(fn, 50);\n    throttled(\"first\");\n    throttled(\"second\"); // trailing call\n    await new Promise(r => setTimeout(r, 60));\n    expect(fn).toHaveBeenCalledTimes(2);\n    expect(fn).toHaveBeenLastCalledWith(\"second\");\n  });\n});",
+        "hidden_tests_code": "import { describe, expect, it, vi } from \"vitest\";\nimport { throttle } from \"./solution\";\n\ndescribe(\"H2 - Throttle Function (hidden)\", () => {\n  it(\"correctly handles consecutive throttles repeatedly\", async () => {\n    const fn = vi.fn();\n    const throttled = throttle(fn, 40);\n    throttled(1);\n    await new Promise(r => setTimeout(r, 50));\n    throttled(2);\n    await new Promise(r => setTimeout(r, 50));\n    expect(fn).toHaveBeenCalledTimes(2);\n  });\n  it(\"ignores multi-intermediate state calls, executing trailing value only\", async () => {\n    const fn = vi.fn();\n    const throttled = throttle(fn, 40);\n    throttled(1);\n    throttled(2);\n    throttled(3);\n    throttled(4);\n    await new Promise(r => setTimeout(r, 50));\n    expect(fn).toHaveBeenCalledTimes(2);\n    expect(fn).toHaveBeenLastCalledWith(4);\n  });\n  it(\"works with multiple hook instances\", async () => {\n    const fn1 = vi.fn();\n    const fn2 = vi.fn();\n    const t1 = throttle(fn1, 50);\n    const t2 = throttle(fn2, 50);\n    t1();\n    t2();\n    expect(fn1).toHaveBeenCalledTimes(1);\n    expect(fn2).toHaveBeenCalledTimes(1);\n  });\n});"
+      },
+      "test_cases_metadata": [
+        {
+          "test_name": "executes immediately on first call and limits further triggers",
+          "is_hidden": false
+        },
+        {
+          "test_name": "safely triggers trailing calls at end of throttle boundary",
+          "is_hidden": false
+        },
+        {
+          "test_name": "correctly handles consecutive throttles repeatedly",
+          "is_hidden": true
+        },
+        {
+          "test_name": "ignores multi-intermediate state calls, executing trailing value only",
+          "is_hidden": true
+        },
+        {
+          "test_name": "works with multiple hook instances",
+          "is_hidden": true
+        }
+      ]
+    },
+    {
+      "id": "H3",
+      "title": "Concurrent Promises Pool",
+      "difficulty": "Hard",
+      "description": "Given an array of functions returning Promises, and a task concurrency pool limit `limit`, resolve all promises concurrently under the strict constraint that no more than `limit` promises are executing simultaneously.\n\n### Requirements\n- Keep active executions bounded strictly to the concurrent max limit value.\n- Return a promise resolving to an array of resolved outputs representing completion order indices mapping.",
+      "constraints": [],
+      "starter_code": {
+        "typescript": "export function promisePool(\n  functions: Array<() => Promise<any>>,\n  limit: number\n): Promise<any[]> {\n  // Write your code here\n}"
+      },
+      "unit_tests": {
+        "sample_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { promisePool } from \"./solution\";\n\ndescribe(\"H3 - Concurrent Promises Pool (sample)\", () => {\n  it(\"executes pool promises correctly bound by limit\", async () => {\n    const sleep = (ms: number, val: any) => () => new Promise(r => setTimeout(() => r(val), ms));\n    const fns = [\n      sleep(30, \"a\"),\n      sleep(20, \"b\"),\n      sleep(40, \"c\")\n    ];\n    const output = await promisePool(fns, 2);\n    expect(output).toEqual([\"a\", \"b\", \"c\"]);\n  });\n  it(\"handles limit parameters exceeding function length\", async () => {\n    const fns = [\n      () => Promise.resolve(1),\n      () => Promise.resolve(2)\n    ];\n    const out = await promisePool(fns, 5);\n    expect(out).toEqual([1, 2]);\n  });\n});",
+        "hidden_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { promisePool } from \"./solution\";\n\ndescribe(\"H3 - Concurrent Promises Pool (hidden)\", () => {\n  it(\"resolves empty input instantly\", async () => {\n    const out = await promisePool([], 2);\n    expect(out).toEqual([]);\n  });\n  it(\"runs strictly limited concurrent promises at any given moment\", async () => {\n    const active: boolean[] = [];\n    let maxConcurrency = 0;\n    const createSpyTask = (id: number) => async () => {\n      active[id] = true;\n      maxConcurrency = Math.max(maxConcurrency, active.filter(Boolean).length);\n      await new Promise(r => setTimeout(r, 10));\n      active[id] = false;\n      return id;\n    };\n    const tasks = Array.from({ length: 6 }, (_, idx) => createSpyTask(idx));\n    const out = await promisePool(tasks, 2);\n    expect(maxConcurrency).toBeLessThanOrEqual(2);\n    expect(out).toEqual([0,1,2,3,4,5]);\n  });\n  it(\"passes error events up correctly if any task rejects\", async () => {\n    const tasks = [\n      () => Promise.resolve(\"ok\"),\n      () => Promise.reject(new Error(\"pool_fail\"))\n    ];\n    await expect(promisePool(tasks, 1)).rejects.toThrow(\"pool_fail\");\n  });\n});"
+      },
+      "test_cases_metadata": [
+        {
+          "test_name": "executes pool promises correctly bound by limit",
+          "is_hidden": false
+        },
+        {
+          "test_name": "handles limit parameters exceeding function length",
+          "is_hidden": false
+        },
+        {
+          "test_name": "resolves empty input instantly",
+          "is_hidden": true
+        },
+        {
+          "test_name": "runs strictly limited concurrent promises at any given moment",
+          "is_hidden": true
+        },
+        {
+          "test_name": "passes error events up correctly if any task rejects",
+          "is_hidden": true
+        }
+      ]
+    },
+    {
+      "id": "H4",
+      "title": "Custom Generator Runner",
+      "difficulty": "Hard",
+      "description": "Write an asynchronous generator yield evaluation engine wrapper function `runGenerator` that resolves yielded values or Promises sequentially, wrapping sequential outputs within returning promises.",
+      "constraints": [],
+      "starter_code": {
+        "typescript": "export function runGenerator(\n  generatorFn: () => Generator<any, any, any>\n): Promise<any> {\n  // Write your code here\n}"
+      },
+      "unit_tests": {
+        "sample_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { runGenerator } from \"./solution\";\n\ndescribe(\"H4 - Custom Generator Runner (sample)\", () => {\n  it(\"executes basic values yielded sequentially\", async () => {\n    function* testGen() {\n      const val1: number = yield 10;\n      const val2: number = yield val1 + 5;\n      return val2 + 10;\n    }\n    const res = await runGenerator(testGen);\n    expect(res).toBe(25);\n  });\n  it(\"handles yielded promise resolutions\", async () => {\n    function* testGen() {\n      const p: string = yield Promise.resolve(\"hello\");\n      return p + \" world\";\n    }\n    const res = await runGenerator(testGen);\n    expect(res).toBe(\"hello world\");\n  });\n});",
+        "hidden_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { runGenerator } from \"./solution\";\n\ndescribe(\"H4 - Custom Generator Runner (hidden)\", () => {\n  it(\"propagates promise exceptions within the generator\", async () => {\n    function* testGen() {\n      try {\n        yield Promise.reject(new Error(\"fail_yield\"));\n      } catch (err: any) {\n        return err.message;\n      }\n    }\n    const result = await runGenerator(testGen);\n    expect(result).toBe(\"fail_yield\");\n  });\n  it(\"propagates unhandled projection exceptions to main promise\", async () => {\n    function* testGen() {\n      yield Promise.reject(new Error(\"unhandled\"));\n    }\n    await expect(runGenerator(testGen)).rejects.toThrow(\"unhandled\");\n  });\n  it(\"executes complex async chains perfectly\", async () => {\n    function* chainGen() {\n      const a: number = yield new Promise(r => setTimeout(() => r(10), 10));\n      const b: number = yield new Promise(r => setTimeout(() => r(20), 10));\n      return a + b;\n    }\n    const res = await runGenerator(chainGen);\n    expect(res).toBe(30);\n  });\n});"
+      },
+      "test_cases_metadata": [
+        {
+          "test_name": "executes basic values yielded sequentially",
+          "is_hidden": false
+        },
+        {
+          "test_name": "handles yielded promise resolutions",
+          "is_hidden": false
+        },
+        {
+          "test_name": "propagates promise exceptions within the generator",
+          "is_hidden": true
+        },
+        {
+          "test_name": "propagates unhandled projection exceptions to main promise",
+          "is_hidden": true
+        },
+        {
+          "test_name": "executes complex async chains perfectly",
+          "is_hidden": true
+        }
+      ]
+    },
+    {
+      "id": "H5",
+      "title": "Timeout Promise Guard",
+      "difficulty": "Hard",
+      "description": "Write a utility function `timeLimitPromise` that wraps a promise-returning function inside a timeout guard. If the execution limit timer is reached before resolution, reject immediately with error message `'Operation Timed Out'`.",
+      "constraints": [],
+      "starter_code": {
+        "typescript": "export function timeLimitPromise<T>(\n  promiseFn: () => Promise<T>,\n  ms: number\n): Promise<T> {\n  // Write your code here\n}"
+      },
+      "unit_tests": {
+        "sample_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { timeLimitPromise } from \"./solution\";\n\ndescribe(\"H5 - Timeout Promise Guard (sample)\", () => {\n  it(\"resolves if performance timing falls under limit bounds\", async () => {\n    const task = () => new Promise(r => setTimeout(() => r(\"success\"), 20));\n    const guarded = timeLimitPromise(task, 50);\n    await expect(guarded).resolves.toBe(\"success\");\n  });\n  it(\"rejects if limit expires earlier than internal resolver\", async () => {\n    const task = () => new Promise(r => setTimeout(() => r(\"slow\"), 100));\n    const guarded = timeLimitPromise(task, 30);\n    await expect(guarded).rejects.toThrow(\"Operation Timed Out\");\n  });\n});",
+        "hidden_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { timeLimitPromise } from \"./solution\";\n\ndescribe(\"H5 - Timeout Promise Guard (hidden)\", () => {\n  it(\"handles instant resolution without timers ticking\", async () => {\n    const task = () => Promise.resolve(\"instant\");\n    const guarded = timeLimitPromise(task, 100);\n    await expect(guarded).resolves.toBe(\"instant\");\n  });\n  it(\"passes native promise rejection messages successfully\", async () => {\n    const task = () => Promise.reject(new Error(\"native_rejection_error\"));\n    const guarded = timeLimitPromise(task, 100);\n    await expect(guarded).rejects.toThrow(\"native_rejection_error\");\n  });\n  it(\"safely triggers timeout even with very low ms parameters\", async () => {\n    const task = () => new Promise(r => setTimeout(() => r(\"foo\"), 5));\n    const guarded = timeLimitPromise(task, 1);\n    await expect(guarded).rejects.toThrow(\"Operation Timed Out\");\n  });\n});"
+      },
+      "test_cases_metadata": [
+        {
+          "test_name": "resolves if performance timing falls under limit bounds",
+          "is_hidden": false
+        },
+        {
+          "test_name": "rejects if limit expires earlier than internal resolver",
+          "is_hidden": false
+        },
+        {
+          "test_name": "handles instant resolution without timers ticking",
+          "is_hidden": true
+        },
+        {
+          "test_name": "passes native promise rejection messages successfully",
+          "is_hidden": true
+        },
+        {
+          "test_name": "safely triggers timeout even with very low ms parameters",
+          "is_hidden": true
+        }
+      ]
+    },
+    {
+      "id": "H6",
+      "title": "LRU Memory Cache",
+      "difficulty": "Hard",
+      "description": "Design and implement a Least Recently Used (LRU) Cache memory management module.\n\n### Requirements\n- Initialize with specific `capacity` boundaries.\n- `get(key)`: Return value representing key presence, updating internal key usage recency representation. Returns `-1` if not found.\n- `put(key, value)`: Insert key-value pairs. If size limits are reached, discard the least recently used records instantly.",
+      "constraints": [],
+      "starter_code": {
+        "typescript": "export class LRUCache {\n  constructor(capacity: number) {\n    // Write your code here\n  }\n\n  get(key: any): any {\n    // Write your code here\n  }\n\n  put(key: any, value: any): void {\n    // Write your code here\n  }\n}"
+      },
+      "unit_tests": {
+        "sample_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { LRUCache } from \"./solution\";\n\ndescribe(\"H6 - LRU Memory Cache (sample)\", () => {\n  it(\"processes retrieval and eviction order validation\", () => {\n    const cache = new LRUCache(2);\n    cache.put(1, 1);\n    cache.put(2, 2);\n    expect(cache.get(1)).toBe(1);\n    cache.put(3, 3); // evicts 2\n    expect(cache.get(2)).toBe(-1);\n  });\n  it(\"updates recency on accesses\", () => {\n    const lru = new LRUCache(2);\n    lru.put(1, 10);\n    lru.put(2, 20);\n    lru.get(1); // updates 1 to most recent\n    lru.put(3, 30); // evicts 2\n    expect(lru.get(2)).toBe(-1);\n    expect(lru.get(1)).toBe(10);\n  });\n});",
+        "hidden_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { LRUCache } from \"./solution\";\n\ndescribe(\"H6 - LRU Memory Cache (hidden)\", () => {\n  it(\"handles overwriting previous values on matching keys\", () => {\n    const cache = new LRUCache(2);\n    cache.put(1, 1);\n    cache.put(1, 11);\n    expect(cache.get(1)).toBe(11);\n  });\n  it(\"capacity 1 operates eviction rules strictly\", () => {\n    const cache = new LRUCache(1);\n    cache.put(\"a\", 100);\n    cache.put(\"b\", 200);\n    expect(cache.get(\"a\")).toBe(-1);\n    expect(cache.get(\"b\")).toBe(200);\n  });\n  it(\"is able to run 100 put operations correctly\", () => {\n    const cache = new LRUCache(10);\n    for (let i = 1; i <= 20; i++) {\n      cache.put(i, i * 10);\n    }\n    expect(cache.get(1)).toBe(-1);\n    expect(cache.get(15)).toBe(150);\n  });\n});"
+      },
+      "test_cases_metadata": [
+        {
+          "test_name": "processes retrieval and eviction order validation",
+          "is_hidden": false
+        },
+        {
+          "test_name": "updates recency on accesses",
+          "is_hidden": false
+        },
+        {
+          "test_name": "handles overwriting previous values on matching keys",
+          "is_hidden": true
+        },
+        {
+          "test_name": "capacity 1 operates eviction rules strictly",
+          "is_hidden": true
+        },
+        {
+          "test_name": "is able to run 100 put operations correctly",
+          "is_hidden": true
+        }
+      ]
+    },
+    {
+      "id": "H7",
+      "title": "Reactive EventEmitter",
+      "difficulty": "Hard",
+      "description": "Write a fully compliant dynamic `EventEmitter` facilitating registration and broadcasting mechanics across custom action channels.\n\n### Requirements\n- `subscribe(event, callback)`: Listen to events. Return custom object with the `.unsubscribe()` capability.\n- `emit(event, args)`: Call all registered handlers with matching channel criteria, passing argument details securely.",
+      "constraints": [],
+      "starter_code": {
+        "typescript": "export class EventEmitter {\n  subscribe(eventName: string, callback: (...args: any[]) => any): { unsubscribe: () => void } {\n    // Write your code here\n  }\n\n  emit(eventName: string, args?: any[]): any[] {\n    // Write your code here\n  }\n}"
+      },
+      "unit_tests": {
+        "sample_tests_code": "import { describe, expect, it, vi } from \"vitest\";\nimport { EventEmitter } from \"./solution\";\n\ndescribe(\"H7 - Reactive EventEmitter (sample)\", () => {\n  it(\"subscribes to events and executes on emissions\", () => {\n    const emitter = new EventEmitter();\n    const subSpy = vi.fn();\n    emitter.subscribe(\"test\", subSpy);\n    emitter.emit(\"test\", [\"hello\"]);\n    expect(subSpy).toHaveBeenCalledWith(\"hello\");\n  });\n  it(\"supports unsubscribing safely from events\", () => {\n    const emitter = new EventEmitter();\n    const spy = vi.fn();\n    const sub = emitter.subscribe(\"event\", spy);\n    sub.unsubscribe();\n    emitter.emit(\"event\");\n    expect(spy).not.toHaveBeenCalled();\n  });\n});",
+        "hidden_tests_code": "import { describe, expect, it, vi } from \"vitest\";\nimport { EventEmitter } from \"./solution\";\n\ndescribe(\"H7 - Reactive EventEmitter (hidden)\", () => {\n  it(\"runs all subscribers in order of registration and returns outcomes\", () => {\n    const emitter = new EventEmitter();\n    const sub1 = emitter.subscribe(\"calc\", (num) => num * 2);\n    const sub2 = emitter.subscribe(\"calc\", (num) => num + 5);\n    const res = emitter.emit(\"calc\", [10]);\n    expect(res).toEqual([20, 15]);\n  });\n  it(\"allows setting nested subscriptions safely within handlers\", () => {\n    const emitter = new EventEmitter();\n    let called = false;\n    emitter.subscribe(\"start\", () => {\n      emitter.subscribe(\"nested\", () => {\n        called = true;\n      });\n    });\n    emitter.emit(\"start\");\n    emitter.emit(\"nested\");\n    expect(called).toBe(true);\n  });\n  it(\"calling unsubscribe multiple times has no side effects\", () => {\n    const emitter = new EventEmitter();\n    const sub = emitter.subscribe(\"temp\", () => {});\n    expect(() => {\n      sub.unsubscribe();\n      sub.unsubscribe();\n    }).not.toThrow();\n  });\n});"
+      },
+      "test_cases_metadata": [
+        {
+          "test_name": "subscribes to events and executes on emissions",
+          "is_hidden": false
+        },
+        {
+          "test_name": "supports unsubscribing safely from events",
+          "is_hidden": false
+        },
+        {
+          "test_name": "runs all subscribers in order of registration and returns outcomes",
+          "is_hidden": true
+        },
+        {
+          "test_name": "allows setting nested subscriptions safely within handlers",
+          "is_hidden": true
+        },
+        {
+          "test_name": "calling unsubscribe multiple times has no side effects",
+          "is_hidden": true
+        }
+      ]
+    },
+    {
+      "id": "H8",
+      "title": "Reactive Object Store",
+      "difficulty": "Hard",
+      "description": "Create an observable proxy store where modification triggers on any child properties raise an global subscriber registration callback.\n\n### Requirements\n- Intercept nested property modifications securely.\n- Solve without generating infinite cycle loops.",
+      "constraints": [],
+      "starter_code": {
+        "typescript": "export function reactiveStore<T extends object>(obj: T, callback: () => void): T {\n  // Write your code here\n}"
+      },
+      "unit_tests": {
+        "sample_tests_code": "import { describe, expect, it, vi } from \"vitest\";\nimport { reactiveStore } from \"./solution\";\n\ndescribe(\"H8 - Reactive Object Store (sample)\", () => {\n  it(\"triggers callback when a top-level property is updated\", () => {\n    const cb = vi.fn();\n    const state = reactiveStore({ count: 0 }, cb);\n    state.count = 1;\n    expect(cb).toHaveBeenCalledTimes(1);\n  });\n  it(\"triggers callback for nested property modifications\", () => {\n    const cb = vi.fn();\n    const state = reactiveStore({ user: { name: \"Alice\" } }, cb);\n    state.user.name = \"Bob\";\n    expect(cb).toHaveBeenCalledTimes(1);\n  });\n});",
+        "hidden_tests_code": "import { describe, expect, it, vi } from \"vitest\";\nimport { reactiveStore } from \"./solution\";\n\ndescribe(\"H8 - Reactive Object Store (hidden)\", () => {\n  it(\"retains custom structures of values within properties\", () => {\n    const cb = vi.fn();\n    const state = reactiveStore({ items: [1, 2, 3] }, cb);\n    state.items.push(4);\n    expect(cb).toHaveBeenCalled();\n    expect(state.items).toEqual([1, 2, 3, 4]);\n  });\n  it(\"does not trigger callbacks if values remain strict identical\", () => {\n    const cb = vi.fn();\n    const state = reactiveStore({ active: true }, cb);\n    state.active = true;\n    expect(cb).not.toHaveBeenCalled();\n  });\n  it(\"does not enter recursive call loops when setting child elements\", () => {\n    const cb = vi.fn();\n    const state = reactiveStore({ nested: { val: 1 } }, cb);\n    expect(() => {\n      state.nested = { val: 2 };\n    }).not.toThrow();\n  });\n});"
+      },
+      "test_cases_metadata": [
+        {
+          "test_name": "triggers callback when a top-level property is updated",
+          "is_hidden": false
+        },
+        {
+          "test_name": "triggers callback for nested property modifications",
+          "is_hidden": false
+        },
+        {
+          "test_name": "retains custom structures of values within properties",
+          "is_hidden": true
+        },
+        {
+          "test_name": "does not trigger callbacks if values remain strict identical",
+          "is_hidden": true
+        },
+        {
+          "test_name": "does not enter recursive call loops when setting child elements",
+          "is_hidden": true
+        }
+      ]
+    },
+    {
+      "id": "H9",
+      "title": "Sequence Task Scheduler",
+      "difficulty": "Hard",
+      "description": "Write a function wrapper `sequenceTasks` performing serial task scheduling pipeline actions on dynamic asynchronizing task lists, safely carrying down resolved results sequentially.",
+      "constraints": [],
+      "starter_code": {
+        "typescript": "export function sequenceTasks<T>(\n  tasks: Array<(input: T) => Promise<T> | T>\n): (initialInput: T) => Promise<T> {\n  // Write your code here\n}"
+      },
+      "unit_tests": {
+        "sample_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { sequenceTasks } from \"./solution\";\n\ndescribe(\"H9 - Sequence Task Scheduler (sample)\", () => {\n  it(\"runs sync and async functions sequentially passing values\", async () => {\n    const t1 = (n: number) => n + 1;\n    const t2 = (n: number) => Promise.resolve(n * 2);\n    const pipeline = sequenceTasks([t1, t2]);\n    const res = await pipeline(5);\n    expect(res).toBe(12); // (5+1)*2 = 12\n  });\n  it(\"handles empty task arrays cleanly by returning input value\", async () => {\n    const pipeline = sequenceTasks([]);\n    await expect(pipeline(\"foo\")).resolves.toBe(\"foo\");\n  });\n});",
+        "hidden_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { sequenceTasks } from \"./solution\";\n\ndescribe(\"H9 - Sequence Task Scheduler (hidden)\", () => {\n  it(\"catches rejection issues within the sequence\", async () => {\n    const t1 = (n: number) => n + 2;\n    const t2 = () => Promise.reject(new Error(\"sequence_broken\"));\n    const pipeline = sequenceTasks([t1, t2]);\n    await expect(pipeline(1)).rejects.toThrow(\"sequence_broken\");\n  });\n  it(\"supports multiple execution cycles independently\", async () => {\n    const t1 = (s: string) => s + \"foo\";\n    const pipeline = sequenceTasks([t1]);\n    const [r1, r2] = await Promise.all([pipeline(\"a\"), pipeline(\"b\")]);\n    expect(r1).toBe(\"afoo\");\n    expect(r2).toBe(\"bfoo\");\n  });\n  it(\"executes tasks strictly in order\", async () => {\n    const order: number[] = [];\n    const t1 = () => { order.push(1); return \"ok\"; };\n    const t2 = () => new Promise(r => setTimeout(() => { order.push(2); r(\"ok\"); }, 10));\n    const t3 = () => { order.push(3); return \"ok\"; };\n    const pipeline = sequenceTasks([t1, t2, t3]);\n    await pipeline(null);\n    expect(order).toEqual([1, 2, 3]);\n  });\n});"
+      },
+      "test_cases_metadata": [
+        {
+          "test_name": "runs sync and async functions sequentially passing values",
+          "is_hidden": false
+        },
+        {
+          "test_name": "handles empty task arrays cleanly by returning input value",
+          "is_hidden": false
+        },
+        {
+          "test_name": "catches rejection issues within the sequence",
+          "is_hidden": true
+        },
+        {
+          "test_name": "supports multiple execution cycles independently",
+          "is_hidden": true
+        },
+        {
+          "test_name": "executes tasks strictly in order",
+          "is_hidden": true
+        }
+      ]
+    },
+    {
+      "id": "H10",
+      "title": "Array Difference Matrix",
+      "difficulty": "Hard",
+      "description": "Write a function returning symmetric items differences across two multi-dimensional arrays, mapping structures, and filtering differences safely.\n\n### Requirements\n- Symmetrically evaluate matching structures within nestings.\n- Compare values recursively if they are arrays or objects, matching content identity strictly.",
+      "constraints": [],
+      "starter_code": {
+        "typescript": "export function arraySymmetricDiff(arr1: any[], arr2: any[]): any[] {\n  // Write your code here\n}"
+      },
+      "unit_tests": {
+        "sample_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { arraySymmetricDiff } from \"./solution\";\n\ndescribe(\"H10 - Array Difference Matrix (sample)\", () => {\n  it(\"evaluates symmetric differences on simple arrays\", () => {\n    expect(arraySymmetricDiff([1, 2, 3], [2, 3, 4])).toEqual([1, 4]);\n  });\n  it(\"compares deep nested object equality structures\", () => {\n    const obj1 = { a: 1 };\n    const obj2 = { a: 1 };\n    const obj3 = { b: 2 };\n    expect(arraySymmetricDiff([obj1], [obj2, obj3])).toEqual([obj3]);\n  });\n});",
+        "hidden_tests_code": "import { describe, expect, it } from \"vitest\";\nimport { arraySymmetricDiff } from \"./solution\";\n\ndescribe(\"H10 - Array Difference Matrix (hidden)\", () => {\n  it(\"handles empty arrays cleanly\", () => {\n    expect(arraySymmetricDiff([], [1, 2])).toEqual([1, 2]);\n    expect(arraySymmetricDiff([1], [])).toEqual([1]);\n  });\n  it(\"compares embedded nested arrays recursively\", () => {\n    expect(arraySymmetricDiff([[1, 2]], [[1, 2], [3, 4]])).toEqual([[3, 4]]);\n  });\n  it(\"ignores element order differences when performing deep comparison\", () => {\n    expect(arraySymmetricDiff([{x: 1, y: 2}], [{y: 2, x: 1}])).toEqual([]);\n  });\n  it(\"safely distinguishes null and undefined elements\", () => {\n    expect(arraySymmetricDiff([null], [undefined])).toEqual([null, undefined]);\n  });\n});"
+      },
+      "test_cases_metadata": [
+        {
+          "test_name": "evaluates symmetric differences on simple arrays",
+          "is_hidden": false
+        },
+        {
+          "test_name": "compares deep nested object equality structures",
+          "is_hidden": false
+        },
+        {
+          "test_name": "handles empty arrays cleanly",
+          "is_hidden": true
+        },
+        {
+          "test_name": "compares embedded nested arrays recursively",
+          "is_hidden": true
+        },
+        {
+          "test_name": "ignores element order differences when performing deep comparison",
+          "is_hidden": true
+        },
+        {
+          "test_name": "safely distinguishes null and undefined elements",
+          "is_hidden": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1495 @@
+[
+  {
+    "id": "Q1",
+    "title": "Flatten Nested Array",
+    "difficulty": "Easy",
+    "description": "Given a nested array `arr`, return a flattened array. A flattened array contains all the elements of the original array but with all nested arrays recursively expanded into a single-level array.\n\n### Constraints\n- Solve without using `Array.prototype.flat`.",
+    "inputFormat": "Function parameters as defined in the signature.",
+    "outputFormat": "Expected output matching the signature guidelines.",
+    "constraints": [
+      "Solve without using Array.prototype.flat."
+    ],
+    "starterCode": "export function flattenArray(arr: any[]): any[] {\n  // Write your code here\n}",
+    "publicTestCases": [
+      {
+        "id": "Q1-pub-1",
+        "is_hidden": false,
+        "input": "[1, [2], [3, 4]]",
+        "expected": "[1, 2, 3, 4]"
+      },
+      {
+        "id": "Q1-pub-2",
+        "is_hidden": false,
+        "input": "[1, [2, [3, [4]]], 5]",
+        "expected": "[1, 2, 3, 4, 5]"
+      },
+      {
+        "id": "Q1-pub-3",
+        "is_hidden": false,
+        "input": "[]",
+        "expected": "[]"
+      },
+      {
+        "id": "Q1-pub-4",
+        "is_hidden": false,
+        "input": "[1, 2, 3]",
+        "expected": "[1, 2, 3]"
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "id": "Q1-hid-1",
+        "is_hidden": true,
+        "input": "[[1], [2], [3]]",
+        "expected": "[1, 2, 3]"
+      },
+      {
+        "id": "Q1-hid-2",
+        "is_hidden": true,
+        "input": "[[[[[42]]]]]",
+        "expected": "[42]"
+      },
+      {
+        "id": "Q1-hid-3",
+        "is_hidden": true,
+        "input": "[1, [2, [3]], \"a\", [\"b\", [\"c\"]]]",
+        "expected": "[1, 2, 3, \"a\", \"b\", \"c\"]"
+      },
+      {
+        "id": "Q1-hid-4",
+        "is_hidden": true,
+        "input": "does not use Array.prototype.flat (structural check)",
+        "expected": "true"
+      },
+      {
+        "id": "Q1-hid-5",
+        "is_hidden": true,
+        "input": "arr",
+        "expected": "[1]"
+      }
+    ]
+  },
+  {
+    "id": "Q2",
+    "title": "Group Array by Size",
+    "difficulty": "Easy",
+    "description": "Given an array `arr` and an integer `size`, return an array of groups. Each group should contain `size` consecutive elements from `arr`. The final group may contain fewer than `size` elements.\n\n### Constraints\n- Solve without using external utility libraries.",
+    "inputFormat": "Function parameters as defined in the signature.",
+    "outputFormat": "Expected output matching the signature guidelines.",
+    "constraints": [
+      "Solve without using external utility libraries."
+    ],
+    "starterCode": "export function groupBySize(arr: any[], size: number): any[][] {\n  // Write your code here\n}",
+    "publicTestCases": [
+      {
+        "id": "Q2-pub-1",
+        "is_hidden": false,
+        "input": "[1, 2, 3, 4, 5, 6], 2",
+        "expected": "[[1, 2], [3, 4], [5, 6]]"
+      },
+      {
+        "id": "Q2-pub-2",
+        "is_hidden": false,
+        "input": "[1, 2, 3, 4, 5], 4",
+        "expected": "[[1, 2, 3, 4], [5]]"
+      },
+      {
+        "id": "Q2-pub-3",
+        "is_hidden": false,
+        "input": "[], 3",
+        "expected": "[]"
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "id": "Q2-hid-1",
+        "is_hidden": true,
+        "input": "[1, 2, 3], 3",
+        "expected": "[[1, 2, 3]]"
+      },
+      {
+        "id": "Q2-hid-2",
+        "is_hidden": true,
+        "input": "[5, 10, 15], 1",
+        "expected": "[[5], [10], [15]]"
+      },
+      {
+        "id": "Q2-hid-3",
+        "is_hidden": true,
+        "input": "[1, 2], 10",
+        "expected": "[[1, 2]]"
+      },
+      {
+        "id": "Q2-hid-4",
+        "is_hidden": true,
+        "input": "[\"a\",\"b\",\"c\",\"d\"], 2",
+        "expected": "[[\"a\",\"b\"], [\"c\",\"d\"]]"
+      },
+      {
+        "id": "Q2-hid-5",
+        "is_hidden": true,
+        "input": "[1,2,3,4,5,6,7], 3",
+        "expected": "[[1,2,3],[4,5,6],[7]]"
+      }
+    ]
+  },
+  {
+    "id": "Q3",
+    "title": "Reverse Array in Groups",
+    "difficulty": "Easy",
+    "description": "Given an array `arr` and an integer `size`, reverse the elements of the array in groups of length `size`. The final group should also be reversed even if it contains fewer than `size` elements.",
+    "inputFormat": "Function parameters as defined in the signature.",
+    "outputFormat": "Expected output matching the signature guidelines.",
+    "constraints": [],
+    "starterCode": "export function reverseInGroups(arr: any[], size: number): any[] {\n  // Write your code here\n}",
+    "publicTestCases": [
+      {
+        "id": "Q3-pub-1",
+        "is_hidden": false,
+        "input": "[1,2,3,4,5,6], 2",
+        "expected": "[2,1,4,3,6,5]"
+      },
+      {
+        "id": "Q3-pub-2",
+        "is_hidden": false,
+        "input": "[1,2,3,4,5], 3",
+        "expected": "[3,2,1,5,4]"
+      },
+      {
+        "id": "Q3-pub-3",
+        "is_hidden": false,
+        "input": "[8,9], 5",
+        "expected": "[9,8]"
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "id": "Q3-hid-1",
+        "is_hidden": true,
+        "input": "[1, 2, 3], 1",
+        "expected": "[1, 2, 3]"
+      },
+      {
+        "id": "Q3-hid-2",
+        "is_hidden": true,
+        "input": "[1, 2, 3, 4], 4",
+        "expected": "[4, 3, 2, 1]"
+      },
+      {
+        "id": "Q3-hid-3",
+        "is_hidden": true,
+        "input": "[], 3",
+        "expected": "[]"
+      },
+      {
+        "id": "Q3-hid-4",
+        "is_hidden": true,
+        "input": "[42], 3",
+        "expected": "[42]"
+      },
+      {
+        "id": "Q3-hid-5",
+        "is_hidden": true,
+        "input": "[1,2,3,4,5,6,7], 3",
+        "expected": "[3,2,1,6,5,4,7]"
+      }
+    ]
+  },
+  {
+    "id": "Q4",
+    "title": "Split String into Chunks",
+    "difficulty": "Easy",
+    "description": "Given a string `s` and an integer `size`, split the string into chunks of length `size`. Return an array containing the chunks in order. The last chunk may contain fewer than `size` characters.",
+    "inputFormat": "Function parameters as defined in the signature.",
+    "outputFormat": "Expected output matching the signature guidelines.",
+    "constraints": [],
+    "starterCode": "export function splitIntoChunks(s: string, size: number): string[] {\n  // Write your code here\n}",
+    "publicTestCases": [
+      {
+        "id": "Q4-pub-1",
+        "is_hidden": false,
+        "input": "\"abcdef\", 2",
+        "expected": "[\"ab\", \"cd\", \"ef\"]"
+      },
+      {
+        "id": "Q4-pub-2",
+        "is_hidden": false,
+        "input": "\"helloworld\", 3",
+        "expected": "[\"hel\", \"low\", \"orl\", \"d\"]"
+      },
+      {
+        "id": "Q4-pub-3",
+        "is_hidden": false,
+        "input": "\"\", 1",
+        "expected": "[]"
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "id": "Q4-hid-1",
+        "is_hidden": true,
+        "input": "\"hello\", 5",
+        "expected": "[\"hello\"]"
+      },
+      {
+        "id": "Q4-hid-2",
+        "is_hidden": true,
+        "input": "\"abc\", 1",
+        "expected": "[\"a\", \"b\", \"c\"]"
+      },
+      {
+        "id": "Q4-hid-3",
+        "is_hidden": true,
+        "input": "\"hi\", 10",
+        "expected": "[\"hi\"]"
+      },
+      {
+        "id": "Q4-hid-4",
+        "is_hidden": true,
+        "input": "\"aabbcc\", 2",
+        "expected": "[\"aa\", \"bb\", \"cc\"]"
+      },
+      {
+        "id": "Q4-hid-5",
+        "is_hidden": true,
+        "input": "\"123456789\", 4",
+        "expected": "[\"1234\", \"5678\", \"9\"]"
+      }
+    ]
+  },
+  {
+    "id": "Q5",
+    "title": "Merge Consecutive Subarrays",
+    "difficulty": "Easy",
+    "description": "Given a 2D array `arr`, return a single merged array containing all elements in order.\n\n### Constraints\n- Solve without using `Array.prototype.flat`.",
+    "inputFormat": "Function parameters as defined in the signature.",
+    "outputFormat": "Expected output matching the signature guidelines.",
+    "constraints": [
+      "Solve without using Array.prototype.flat."
+    ],
+    "starterCode": "export function mergeSubarrays(arr: any[][]): any[] {\n  // Write your code here\n}",
+    "publicTestCases": [
+      {
+        "id": "Q5-pub-1",
+        "is_hidden": false,
+        "input": "[[1,2],[3,4],[5]]",
+        "expected": "[1,2,3,4,5]"
+      },
+      {
+        "id": "Q5-pub-2",
+        "is_hidden": false,
+        "input": "[[7],[8,9],[]]",
+        "expected": "[7,8,9]"
+      },
+      {
+        "id": "Q5-pub-3",
+        "is_hidden": false,
+        "input": "[]",
+        "expected": "[]"
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "id": "Q5-hid-1",
+        "is_hidden": true,
+        "input": "[[], [], []]",
+        "expected": "[]"
+      },
+      {
+        "id": "Q5-hid-2",
+        "is_hidden": true,
+        "input": "[[1, 2, 3]]",
+        "expected": "[1, 2, 3]"
+      },
+      {
+        "id": "Q5-hid-3",
+        "is_hidden": true,
+        "input": "[[3],[1],[2]]",
+        "expected": "[3,1,2]"
+      },
+      {
+        "id": "Q5-hid-4",
+        "is_hidden": true,
+        "input": "does not use Array.prototype.flat",
+        "expected": "true"
+      }
+    ]
+  },
+  {
+    "id": "Q6",
+    "title": "Rotate Array by K Positions",
+    "difficulty": "Easy",
+    "description": "Given an array `arr` and an integer `k`, rotate the array to the right by `k` positions.",
+    "inputFormat": "Function parameters as defined in the signature.",
+    "outputFormat": "Expected output matching the signature guidelines.",
+    "constraints": [],
+    "starterCode": "export function rotateArray(arr: any[], k: number): any[] {\n  // Write your code here\n}",
+    "publicTestCases": [
+      {
+        "id": "Q6-pub-1",
+        "is_hidden": false,
+        "input": "[1,2,3,4,5], 2",
+        "expected": "[4,5,1,2,3]"
+      },
+      {
+        "id": "Q6-pub-2",
+        "is_hidden": false,
+        "input": "[1,2], 3",
+        "expected": "[2,1]"
+      },
+      {
+        "id": "Q6-pub-3",
+        "is_hidden": false,
+        "input": "[], 1",
+        "expected": "[]"
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "id": "Q6-hid-1",
+        "is_hidden": true,
+        "input": "[1,2,3], 0",
+        "expected": "[1,2,3]"
+      },
+      {
+        "id": "Q6-hid-2",
+        "is_hidden": true,
+        "input": "[1,2,3], 3",
+        "expected": "[1,2,3]"
+      },
+      {
+        "id": "Q6-hid-3",
+        "is_hidden": true,
+        "input": "[99], 100",
+        "expected": "[99]"
+      },
+      {
+        "id": "Q6-hid-4",
+        "is_hidden": true,
+        "input": "[1,2,3,4], 8",
+        "expected": "[1,2,3,4]"
+      },
+      {
+        "id": "Q6-hid-5",
+        "is_hidden": true,
+        "input": "[1,2,3,4,5], 1",
+        "expected": "[5,1,2,3,4]"
+      }
+    ]
+  },
+  {
+    "id": "Q7",
+    "title": "Partition Array into Equal Pairs",
+    "difficulty": "Easy",
+    "description": "Given an array `arr`, return an array containing pairs of consecutive elements. If the array has an odd number of elements, the final pair should contain only one element.",
+    "inputFormat": "Function parameters as defined in the signature.",
+    "outputFormat": "Expected output matching the signature guidelines.",
+    "constraints": [],
+    "starterCode": "export function partitionIntoPairs(arr: any[]): any[][] {\n  // Write your code here\n}",
+    "publicTestCases": [
+      {
+        "id": "Q7-pub-1",
+        "is_hidden": false,
+        "input": "[1,2,3,4]",
+        "expected": "[[1,2],[3,4]]"
+      },
+      {
+        "id": "Q7-pub-2",
+        "is_hidden": false,
+        "input": "[5,6,7]",
+        "expected": "[[5,6],[7]]"
+      },
+      {
+        "id": "Q7-pub-3",
+        "is_hidden": false,
+        "input": "[]",
+        "expected": "[]"
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "id": "Q7-hid-1",
+        "is_hidden": true,
+        "input": "[42]",
+        "expected": "[[42]]"
+      },
+      {
+        "id": "Q7-hid-2",
+        "is_hidden": true,
+        "input": "[1,2]",
+        "expected": "[[1,2]]"
+      },
+      {
+        "id": "Q7-hid-3",
+        "is_hidden": true,
+        "input": "[1,2,3,4,5,6]",
+        "expected": "[[1,2],[3,4],[5,6]]"
+      },
+      {
+        "id": "Q7-hid-4",
+        "is_hidden": true,
+        "input": "[\"a\",\"b\",\"c\"]",
+        "expected": "[[\"a\",\"b\"],[\"c\"]]"
+      }
+    ]
+  },
+  {
+    "id": "Q8",
+    "title": "Remove Every Nth Element",
+    "difficulty": "Easy",
+    "description": "Given an array `arr` and an integer `n`, remove every nth element from the array (1-based position). Return the remaining elements in order.",
+    "inputFormat": "Function parameters as defined in the signature.",
+    "outputFormat": "Expected output matching the signature guidelines.",
+    "constraints": [],
+    "starterCode": "export function removeEveryNth(arr: any[], n: number): any[] {\n  // Write your code here\n}",
+    "publicTestCases": [
+      {
+        "id": "Q8-pub-1",
+        "is_hidden": false,
+        "input": "[1,2,3,4,5,6], 2",
+        "expected": "[1,3,5]"
+      },
+      {
+        "id": "Q8-pub-2",
+        "is_hidden": false,
+        "input": "[10,20,30,40,50], 3",
+        "expected": "[10,20,40,50]"
+      },
+      {
+        "id": "Q8-pub-3",
+        "is_hidden": false,
+        "input": "[7,8], 1",
+        "expected": "[]"
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "id": "Q8-hid-1",
+        "is_hidden": true,
+        "input": "[1,2,3], 10",
+        "expected": "[1,2,3]"
+      },
+      {
+        "id": "Q8-hid-2",
+        "is_hidden": true,
+        "input": "[], 3",
+        "expected": "[]"
+      },
+      {
+        "id": "Q8-hid-3",
+        "is_hidden": true,
+        "input": "[1,2,3,4], 4",
+        "expected": "[1,2,3]"
+      },
+      {
+        "id": "Q8-hid-4",
+        "is_hidden": true,
+        "input": "[1,2,3,4,5,6,7], 3",
+        "expected": "[1,2,4,5,7]"
+      }
+    ]
+  },
+  {
+    "id": "Q9",
+    "title": "Divide Array into Two Halves",
+    "difficulty": "Easy",
+    "description": "Given an array `arr`, divide it into two halves. If the array length is odd, the first half should contain one extra element. Return the two halves as a 2D array.",
+    "inputFormat": "Function parameters as defined in the signature.",
+    "outputFormat": "Expected output matching the signature guidelines.",
+    "constraints": [],
+    "starterCode": "export function divideIntoHalves(arr: any[]): [any[], any[]] {\n  // Write your code here\n}",
+    "publicTestCases": [
+      {
+        "id": "Q9-pub-1",
+        "is_hidden": false,
+        "input": "[1,2,3,4]",
+        "expected": "[[1,2],[3,4]]"
+      },
+      {
+        "id": "Q9-pub-2",
+        "is_hidden": false,
+        "input": "[1,2,3,4,5]",
+        "expected": "[[1,2,3],[4,5]]"
+      },
+      {
+        "id": "Q9-pub-3",
+        "is_hidden": false,
+        "input": "[]",
+        "expected": "[[],[]]"
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "id": "Q9-hid-1",
+        "is_hidden": true,
+        "input": "[42]",
+        "expected": "[[42],[]]"
+      },
+      {
+        "id": "Q9-hid-2",
+        "is_hidden": true,
+        "input": "[1,2]",
+        "expected": "[[1],[2]]"
+      },
+      {
+        "id": "Q9-hid-3",
+        "is_hidden": true,
+        "input": "[1,2,3,4,5,6,7]",
+        "expected": "[[1,2,3,4],[5,6,7]]"
+      },
+      {
+        "id": "Q9-hid-4",
+        "is_hidden": true,
+        "input": "preserves original array (no mutation)",
+        "expected": "true"
+      }
+    ]
+  },
+  {
+    "id": "Q10",
+    "title": "Interleave Two Arrays",
+    "difficulty": "Easy",
+    "description": "Given two arrays `arr1` and `arr2`, return a new array by alternating elements from each array. If one array is longer, append the remaining elements at the end.",
+    "inputFormat": "Function parameters as defined in the signature.",
+    "outputFormat": "Expected output matching the signature guidelines.",
+    "constraints": [],
+    "starterCode": "export function interleaveArrays(arr1: any[], arr2: any[]): any[] {\n  // Write your code here\n}",
+    "publicTestCases": [
+      {
+        "id": "Q10-pub-1",
+        "is_hidden": false,
+        "input": "[1,3,5],[2,4,6]",
+        "expected": "[1,2,3,4,5,6]"
+      },
+      {
+        "id": "Q10-pub-2",
+        "is_hidden": false,
+        "input": "[1,2],[3,4,5,6]",
+        "expected": "[1,3,2,4,5,6]"
+      },
+      {
+        "id": "Q10-pub-3",
+        "is_hidden": false,
+        "input": "[],[1,2]",
+        "expected": "[1,2]"
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "id": "Q10-hid-1",
+        "is_hidden": true,
+        "input": "[],[]",
+        "expected": "[]"
+      },
+      {
+        "id": "Q10-hid-2",
+        "is_hidden": true,
+        "input": "[1,2,3],[]",
+        "expected": "[1,2,3]"
+      },
+      {
+        "id": "Q10-hid-3",
+        "is_hidden": true,
+        "input": "[1,2,3,4],[5]",
+        "expected": "[1,5,2,3,4]"
+      },
+      {
+        "id": "Q10-hid-4",
+        "is_hidden": true,
+        "input": "[1],[2]",
+        "expected": "[1,2]"
+      }
+    ]
+  },
+  {
+    "id": "M1",
+    "title": "Item List Manager",
+    "difficulty": "Medium",
+    "description": "Create a React application called 'Item List Manager' that displays a list of items and allows users to add new items to the list. Items should be displayed in an unordered list (`<ul>`).\n\n### Requirements\n- When the application loads, it should display an empty list.\n- The input field (textbox) should accept user text input.\n- When the button is clicked, the text from the input field is added to the list and the input field is cleared.\n- If the input field is empty or contains only whitespace, clicking the button should not add anything.",
+    "inputFormat": "Function parameters as defined in the signature.",
+    "outputFormat": "Expected output matching the signature guidelines.",
+    "constraints": [
+      "Input should not add empty or whitespace-only elements.",
+      "Render list inside a 'ul' element and items as 'li' elements with 'listitem' role."
+    ],
+    "starterCode": "import React, { useState } from 'react';\n\nexport default function ItemListManager() {\n  // Write your code here\n}",
+    "publicTestCases": [
+      {
+        "id": "M1-pub-1",
+        "is_hidden": false,
+        "input": "renders with an empty list initially",
+        "expected": "true"
+      },
+      {
+        "id": "M1-pub-2",
+        "is_hidden": false,
+        "input": "adds an item when text is entered and button is clicked",
+        "expected": "true"
+      },
+      {
+        "id": "M1-pub-3",
+        "is_hidden": false,
+        "input": "clears the input field after adding an item",
+        "expected": "true"
+      },
+      {
+        "id": "M1-pub-4",
+        "is_hidden": false,
+        "input": "does not add empty item when input is blank",
+        "expected": "true"
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "id": "M1-hid-1",
+        "is_hidden": true,
+        "input": "adds multiple items in order",
+        "expected": "true"
+      },
+      {
+        "id": "M1-hid-2",
+        "is_hidden": true,
+        "input": "does not add whitespace-only input",
+        "expected": "true"
+      },
+      {
+        "id": "M1-hid-3",
+        "is_hidden": true,
+        "input": "renders items inside a <ul> element",
+        "expected": "true"
+      },
+      {
+        "id": "M1-hid-4",
+        "is_hidden": true,
+        "input": "can add 10+ items without issue",
+        "expected": "true"
+      }
+    ]
+  },
+  {
+    "id": "M2",
+    "title": "Code Review Feedback",
+    "difficulty": "Medium",
+    "description": "Create a React application called 'Code Review Feedback' that tracks upvote and downvote counts for five code quality aspects: Readability, Performance, Security, Documentation, and Testing.\n\n### Requirements\n- Display all five aspects with independent 'Upvote' and 'Downvote' buttons.\n- Initial count for upvotes and downvotes for all aspects is `0`.\n- Clicking Upvote increments that aspect's upvote count; Downvote increments its downvote count.\n- Counts must be updated in the UI immediately.",
+    "inputFormat": "Function parameters as defined in the signature.",
+    "outputFormat": "Expected output matching the signature guidelines.",
+    "constraints": [],
+    "starterCode": "import React, { useState } from 'react';\n\nexport default function CodeReviewFeedback() {\n  // Write your code here\n}",
+    "publicTestCases": [
+      {
+        "id": "M2-pub-1",
+        "is_hidden": false,
+        "input": "renders all five aspects",
+        "expected": "true"
+      },
+      {
+        "id": "M2-pub-2",
+        "is_hidden": false,
+        "input": "initial counts are all 0",
+        "expected": "true"
+      },
+      {
+        "id": "M2-pub-3",
+        "is_hidden": false,
+        "input": "increments upvote count for Readability",
+        "expected": "true"
+      },
+      {
+        "id": "M2-pub-4",
+        "is_hidden": false,
+        "input": "increments downvote count independently",
+        "expected": "true"
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "id": "M2-hid-1",
+        "is_hidden": true,
+        "input": "upvote and downvote counts update independently per aspect",
+        "expected": "true"
+      },
+      {
+        "id": "M2-hid-2",
+        "is_hidden": true,
+        "input": "clicking upvote 5 times shows count of 5",
+        "expected": "true"
+      },
+      {
+        "id": "M2-hid-3",
+        "is_hidden": true,
+        "input": "each aspect has exactly one Upvote and one Downvote button",
+        "expected": "true"
+      },
+      {
+        "id": "M2-hid-4",
+        "is_hidden": true,
+        "input": "counts do not affect sibling aspects",
+        "expected": "true"
+      }
+    ]
+  },
+  {
+    "id": "M3",
+    "title": "Contact Form",
+    "difficulty": "Medium",
+    "description": "Create a React application called 'Contact Form' that collects Name, Email, and Message, validates them, and displays submitted data below the form.\n\n### Requirements\n- Fields: Name (text input), Email (text input), Message (textarea).\n- Validate that no fields are empty on submit; show 'All fields are required.' error if any are.\n- On successful submission, display submitted data below the form and clear all fields.\n- Inputs should have clean matching labels (`name`, `email`, `message`).",
+    "inputFormat": "Function parameters as defined in the signature.",
+    "outputFormat": "Expected output matching the signature guidelines.",
+    "constraints": [
+      "Label linkages must be linked via htmlFor or wrapped labels."
+    ],
+    "starterCode": "import React, { useState } from 'react';\n\nexport default function ContactForm() {\n  // Write your code here\n}",
+    "publicTestCases": [
+      {
+        "id": "M3-pub-1",
+        "is_hidden": false,
+        "input": "renders all form fields and submit button",
+        "expected": "true"
+      },
+      {
+        "id": "M3-pub-2",
+        "is_hidden": false,
+        "input": "shows error when any field is empty",
+        "expected": "true"
+      },
+      {
+        "id": "M3-pub-3",
+        "is_hidden": false,
+        "input": "displays submitted data below form on valid submission",
+        "expected": "true"
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "id": "M3-hid-1",
+        "is_hidden": true,
+        "input": "clears all fields after successful submission",
+        "expected": "true"
+      },
+      {
+        "id": "M3-hid-2",
+        "is_hidden": true,
+        "input": "does not show submitted data if validation fails",
+        "expected": "true"
+      },
+      {
+        "id": "M3-hid-3",
+        "is_hidden": true,
+        "input": "error message disappears after successful submission",
+        "expected": "true"
+      }
+    ]
+  },
+  {
+    "id": "M4",
+    "title": "Patient Medical Records",
+    "difficulty": "Medium",
+    "description": "Create a React application called 'Patient Medical Records' with two components: Search (dropdown + Show button) and Records (table + Next button). Load 3 patients from `medicalRecords.js`. Cycle through records with the Next button, looping back to the first patient after the last.\n\n### Requirements\n- Dropdown defaults to 'Select Patient' (selected + disabled value). It must contain the 3 patient names dynamically.\n- If 'Show' is clicked without selecting, alert the user: 'Please select a patient name'.\n- Show button displays the selected patient's records in an HTML table with a Next button.\n- Next cycles through patients by ID in ascending order, looping from the last to the first.",
+    "inputFormat": "Function parameters as defined in the signature.",
+    "outputFormat": "Expected output matching the signature guidelines.",
+    "constraints": [],
+    "starterCode": "import React, { useState } from 'react';\n\n// Sample patient data representing what's in medicalRecords.js\nexport const initialPatients = [\n  { id: \"1\", name: \"John Doe\", age: 34, diagnosis: \"Flu\", treatment: \"Rest\" },\n  { id: \"2\", name: \"Jane Smith\", age: 28, diagnosis: \"Gastritis\", treatment: \"Antacids\" },\n  { id: \"3\", name: \"Alice Johnson\", age: 45, diagnosis: \"Migraine\", treatment: \"Painkillers\" }\n];\n\nexport default function App() {\n  // Write your code here\n}",
+    "publicTestCases": [
+      {
+        "id": "M4-pub-1",
+        "is_hidden": false,
+        "input": "alerts when Show clicked without selection",
+        "expected": "true"
+      },
+      {
+        "id": "M4-pub-2",
+        "is_hidden": false,
+        "input": "no records table visible on initial load",
+        "expected": "true"
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "id": "M4-hid-1",
+        "is_hidden": true,
+        "input": "shows records table after valid patient selection and Show click",
+        "expected": "true"
+      },
+      {
+        "id": "M4-hid-2",
+        "is_hidden": true,
+        "input": "Next loops back to first patient after last",
+        "expected": "true"
+      },
+      {
+        "id": "M4-hid-3",
+        "is_hidden": true,
+        "input": "dropdown contains exactly 3 patient options plus placeholder",
+        "expected": "true"
+      }
+    ]
+  },
+  {
+    "id": "M5",
+    "title": "Blog Post Manager",
+    "difficulty": "Medium",
+    "description": "Create a React application called 'Blog Post' allowing users to create, display, and delete blog posts. Posts appear in a grid layout, each inside a box (post-card) with a title, description, and Delete button.\n\n### Requirements\n- Two inputs: title (text) and description (textarea).\n- 'Create' button adds a post only if both fields have values.\n- After creation, both inputs are cleared.\n- Each post card displays the title, description, and a 'Delete' button to remove it.",
+    "inputFormat": "Function parameters as defined in the signature.",
+    "outputFormat": "Expected output matching the signature guidelines.",
+    "constraints": [],
+    "starterCode": "import React, { useState } from 'react';\n\nexport default function BlogPost() {\n  // Write your code here\n}",
+    "publicTestCases": [
+      {
+        "id": "M5-pub-1",
+        "is_hidden": false,
+        "input": "renders title input, description textarea, and Create button",
+        "expected": "true"
+      },
+      {
+        "id": "M5-pub-2",
+        "is_hidden": false,
+        "input": "creates a post and displays it",
+        "expected": "true"
+      },
+      {
+        "id": "M5-pub-3",
+        "is_hidden": false,
+        "input": "does not create post if title is empty",
+        "expected": "true"
+      },
+      {
+        "id": "M5-pub-4",
+        "is_hidden": false,
+        "input": "Delete button removes a post",
+        "expected": "true"
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "id": "M5-hid-1",
+        "is_hidden": true,
+        "input": "clears inputs after post creation",
+        "expected": "true"
+      },
+      {
+        "id": "M5-hid-2",
+        "is_hidden": true,
+        "input": "does not create post if description is empty",
+        "expected": "true"
+      },
+      {
+        "id": "M5-hid-3",
+        "is_hidden": true,
+        "input": "deleting one post does not affect others",
+        "expected": "true"
+      }
+    ]
+  },
+  {
+    "id": "M6",
+    "title": "Basic Slideshow",
+    "difficulty": "Medium",
+    "description": "Create a React 'Basic Slideshow' component that takes a `slides` prop (array of `{title, text}` objects) and supports Next, Prev, and Restart navigation. \n\n### Requirements\n- Prev and Restart buttons are disabled on the first slide.\n- Next button is disabled on the last slide.\n- Next advances the slide, Prev retreats to the previous slide, and Restart takes you back to the very first slide.",
+    "inputFormat": "Function parameters as defined in the signature.",
+    "outputFormat": "Expected output matching the signature guidelines.",
+    "constraints": [],
+    "starterCode": "import React, { useState } from 'react';\n\nexport interface Slide {\n  title: string;\n  text: string;\n}\n\nexport default function Slides({ slides }: { slides: Slide[] }) {\n  // Write your code here\n}",
+    "publicTestCases": [
+      {
+        "id": "M6-pub-1",
+        "is_hidden": false,
+        "input": "renders first slide on load",
+        "expected": "true"
+      },
+      {
+        "id": "M6-pub-2",
+        "is_hidden": false,
+        "input": "Prev and Restart are disabled on first slide",
+        "expected": "true"
+      },
+      {
+        "id": "M6-pub-3",
+        "is_hidden": false,
+        "input": "Next advances to second slide",
+        "expected": "true"
+      },
+      {
+        "id": "M6-pub-4",
+        "is_hidden": false,
+        "input": "Next is disabled on last slide",
+        "expected": "true"
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "id": "M6-hid-1",
+        "is_hidden": true,
+        "input": "Restart returns to first slide from any position",
+        "expected": "true"
+      },
+      {
+        "id": "M6-hid-2",
+        "is_hidden": true,
+        "input": "Prev goes back to previous slide",
+        "expected": "true"
+      },
+      {
+        "id": "M6-hid-3",
+        "is_hidden": true,
+        "input": "Prev and Restart enabled after advancing from first slide",
+        "expected": "true"
+      },
+      {
+        "id": "M6-hid-4",
+        "is_hidden": true,
+        "input": "single-slide deck disables Next, Prev, and Restart",
+        "expected": "true"
+      }
+    ]
+  },
+  {
+    "id": "M7",
+    "title": "Employee Validation Form",
+    "difficulty": "Medium",
+    "description": "Create a React app with an `EmployeeValidationForm` component collecting Name, Email, Employee ID, and Joining Date — each with inline validation. Submit is disabled until all fields are valid.\n\n### Validation Rules\n1. **Name**: At least 4 characters, only letters and spaces.\n2. **Email**: Valid email format.\n3. **Employee ID**: Exactly 6 numeric digits.\n4. **Joining Date**: Must not be a future date.",
+    "inputFormat": "Function parameters as defined in the signature.",
+    "outputFormat": "Expected output matching the signature guidelines.",
+    "constraints": [],
+    "starterCode": "import React, { useState } from 'react';\n\nexport default function EmployeeValidationForm() {\n  // Write your code here\n}",
+    "publicTestCases": [
+      {
+        "id": "M7-pub-1",
+        "is_hidden": false,
+        "input": "submit button is disabled initially",
+        "expected": "true"
+      },
+      {
+        "id": "M7-pub-2",
+        "is_hidden": false,
+        "input": "shows name error for short name",
+        "expected": "true"
+      },
+      {
+        "id": "M7-pub-3",
+        "is_hidden": false,
+        "input": "shows email error for invalid format",
+        "expected": "true"
+      },
+      {
+        "id": "M7-pub-4",
+        "is_hidden": false,
+        "input": "shows employee ID error for non-6-digit input",
+        "expected": "true"
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "id": "M7-hid-1",
+        "is_hidden": true,
+        "input": "submit enabled when all fields valid",
+        "expected": "true"
+      },
+      {
+        "id": "M7-hid-2",
+        "is_hidden": true,
+        "input": "resets form after submission",
+        "expected": "true"
+      },
+      {
+        "id": "M7-hid-3",
+        "is_hidden": true,
+        "input": "rejects name with numbers",
+        "expected": "true"
+      },
+      {
+        "id": "M7-hid-4",
+        "is_hidden": true,
+        "input": "rejects future joining date",
+        "expected": "true"
+      }
+    ]
+  },
+  {
+    "id": "M8",
+    "title": "CryptoRank Exchange",
+    "difficulty": "Medium",
+    "description": "Build a 'CryptoRank Exchange' React app that estimates cryptocurrency coins received for a given fiat amount. Show a table of Exchange Rate and Number of Coins. Validate amount against available balance.\n\n### Conversion Formula\n`Number of Coins = Amount * Exchange Rate` (round/format to 8 decimal places)\n\n### Form Inputs\n- An input (type: `spinbutton` or `number`) for selecting/specifying currency amount.\n\n### Error messages\n- Empty input: 'Amount cannot be empty'\n- Amount < 0.01: 'Amount cannot be less than 0.01'\n- Amount > balance: 'Amount cannot exceed the available balance'\nAll coins show 'n/a' when inputs are invalid.",
+    "inputFormat": "Function parameters as defined in the signature.",
+    "outputFormat": "Expected output matching the signature guidelines.",
+    "constraints": [],
+    "starterCode": "import React, { useState } from 'react';\n\nexport default function CryptoRankExchange({ balance = 500 }: { balance?: number }) {\n  // Write your code here\n}",
+    "publicTestCases": [
+      {
+        "id": "M8-pub-1",
+        "is_hidden": false,
+        "input": "shows 0.00000000 by default for all coins",
+        "expected": "true"
+      },
+      {
+        "id": "M8-pub-2",
+        "is_hidden": false,
+        "input": "shows error for empty input",
+        "expected": "true"
+      },
+      {
+        "id": "M8-pub-3",
+        "is_hidden": false,
+        "input": "shows error when amount below 0.01",
+        "expected": "true"
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "id": "M8-hid-1",
+        "is_hidden": true,
+        "input": "shows n/a for all coins on invalid amount",
+        "expected": "true"
+      },
+      {
+        "id": "M8-hid-2",
+        "is_hidden": true,
+        "input": "calculates coins to 8 decimal places for valid amount",
+        "expected": "true"
+      },
+      {
+        "id": "M8-hid-3",
+        "is_hidden": true,
+        "input": "table updates dynamically as amount changes",
+        "expected": "true"
+      },
+      {
+        "id": "M8-hid-4",
+        "is_hidden": true,
+        "input": "error message for exceeding balance",
+        "expected": "true"
+      }
+    ]
+  },
+  {
+    "id": "M9",
+    "title": "useQuery Custom Hook",
+    "difficulty": "Medium",
+    "description": "Implement a custom React Hook `useQuery<T>` that manages query executions, load states, error capture, and data storage for custom promises.\n\n### Signature\n```ts\nfunction useQuery<T>(\n  fn: () => Promise<T>,\n  deps: DependencyList = []\n): QueryResult<T>\n```\n\n### Returns one of:\n- `{ status: \"loading\" }`\n- `{ status: \"error\"; error: Error }`\n- `{ status: \"success\"; data: T }`",
+    "inputFormat": "Function parameters as defined in the signature.",
+    "outputFormat": "Expected output matching the signature guidelines.",
+    "constraints": [],
+    "starterCode": "import { DependencyList, useState, useEffect } from 'react';\n\nexport type QueryResult<T> =\n  | { status: 'loading' }\n  | { status: 'error'; error: Error }\n  | { status: 'success'; data: T };\n\nexport function useQuery<T>(fn: () => Promise<T>, deps: DependencyList = []): QueryResult<T> {\n  // Write your code here\n}",
+    "publicTestCases": [
+      {
+        "id": "M9-pub-1",
+        "is_hidden": false,
+        "input": "returns loading status initially",
+        "expected": "true"
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "id": "M9-hid-1",
+        "is_hidden": true,
+        "input": "Default Case",
+        "expected": "true"
+      }
+    ]
+  },
+  {
+    "id": "M10",
+    "title": "useArray Custom Hook",
+    "difficulty": "Medium",
+    "description": "Implement a custom React Hook `useArray` that manages dynamic array state modifications with utility helpers.\n\n### Provided Methods\n1. `push(item)`: Appends an item to the end of the array.\n2. `update(index, item)`: Replaces element at specified index.\n3. `remove(index)`: Removes item at specific index (out-of-bounds must not throw errors).\n4. `filter(callback)`: Filters the elements containing a condition.\n5. `set(newArray)`: Replaces the entire array.\n6. `clear()`: Empties the array.\nAll updates must immediately refresh references.",
+    "inputFormat": "Function parameters as defined in the signature.",
+    "outputFormat": "Expected output matching the signature guidelines.",
+    "constraints": [],
+    "starterCode": "import { useState } from 'react';\n\nexport function useArray<T>(initialValue: T[] = []) {\n  // Write your code here\n}",
+    "publicTestCases": [
+      {
+        "id": "M10-pub-1",
+        "is_hidden": false,
+        "input": "initializes with default value",
+        "expected": "true"
+      },
+      {
+        "id": "M10-pub-2",
+        "is_hidden": false,
+        "input": "push adds item to end",
+        "expected": "true"
+      },
+      {
+        "id": "M10-pub-3",
+        "is_hidden": false,
+        "input": "remove removes item at index",
+        "expected": "true"
+      },
+      {
+        "id": "M10-pub-4",
+        "is_hidden": false,
+        "input": "clear empties the array",
+        "expected": "true"
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "id": "M10-hid-1",
+        "is_hidden": true,
+        "input": "update replaces element at index",
+        "expected": "true"
+      },
+      {
+        "id": "M10-hid-2",
+        "is_hidden": true,
+        "input": "filter retains only matching elements",
+        "expected": "true"
+      },
+      {
+        "id": "M10-hid-3",
+        "is_hidden": true,
+        "input": "set replaces entire array",
+        "expected": "true"
+      },
+      {
+        "id": "M10-hid-4",
+        "is_hidden": true,
+        "input": "push to empty array creates single-element array",
+        "expected": "true"
+      },
+      {
+        "id": "M10-hid-5",
+        "is_hidden": true,
+        "input": "remove at out-of-bounds index does not throw",
+        "expected": "true"
+      }
+    ]
+  },
+  {
+    "id": "H1",
+    "title": "Debounce Function",
+    "difficulty": "Hard",
+    "description": "Implement a fully featured robust `debounce` function. Debouncing delays a function call until a specified amount of time (`delay`) has elapsed since the last time the debounced function was invoked.\n\n### Requirements\n- The returned function must allow passing variables and returning results/triggering handlers.\n- It must support a `cancel` method to reset the pending execution timer.",
+    "inputFormat": "Function parameters as defined in the signature.",
+    "outputFormat": "Expected output matching the signature guidelines.",
+    "constraints": [],
+    "starterCode": "export function debounce<T extends (...args: any[]) => void>(\n  fn: T,\n  delay: number\n): ((...args: Parameters<T>) => void) & { cancel: () => void } {\n  // Write your code here\n}",
+    "publicTestCases": [
+      {
+        "id": "H1-pub-1",
+        "is_hidden": false,
+        "input": "Default Case",
+        "expected": "true"
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "id": "H1-hid-1",
+        "is_hidden": true,
+        "input": "allows setting cancel multiple times safely",
+        "expected": "true"
+      }
+    ]
+  },
+  {
+    "id": "H2",
+    "title": "Throttle Function",
+    "difficulty": "Hard",
+    "description": "Implement a fully featured robust `throttle` function. Throttling ensures that a target function is executed at most once per a defined time interval (`limit`).\n\n### Requirements\n- The returned function must allow passing arguments and forwarding execution contexts.\n- Any execution trigger occurring during the throttled interval must be run strictly at the end of the current period.",
+    "inputFormat": "Function parameters as defined in the signature.",
+    "outputFormat": "Expected output matching the signature guidelines.",
+    "constraints": [],
+    "starterCode": "export function throttle<T extends (...args: any[]) => void>(\n  fn: T,\n  limit: number\n): (...args: Parameters<T>) => void {\n  // Write your code here\n}",
+    "publicTestCases": [
+      {
+        "id": "H2-pub-1",
+        "is_hidden": false,
+        "input": "Default Case",
+        "expected": "true"
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "id": "H2-hid-1",
+        "is_hidden": true,
+        "input": "Default Case",
+        "expected": "true"
+      }
+    ]
+  },
+  {
+    "id": "H3",
+    "title": "Concurrent Promises Pool",
+    "difficulty": "Hard",
+    "description": "Given an array of functions returning Promises, and a task concurrency pool limit `limit`, resolve all promises concurrently under the strict constraint that no more than `limit` promises are executing simultaneously.\n\n### Requirements\n- Keep active executions bounded strictly to the concurrent max limit value.\n- Return a promise resolving to an array of resolved outputs representing completion order indices mapping.",
+    "inputFormat": "Function parameters as defined in the signature.",
+    "outputFormat": "Expected output matching the signature guidelines.",
+    "constraints": [],
+    "starterCode": "export function promisePool(\n  functions: Array<() => Promise<any>>,\n  limit: number\n): Promise<any[]> {\n  // Write your code here\n}",
+    "publicTestCases": [
+      {
+        "id": "H3-pub-1",
+        "is_hidden": false,
+        "input": "Default Case",
+        "expected": "true"
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "id": "H3-hid-1",
+        "is_hidden": true,
+        "input": "Default Case",
+        "expected": "true"
+      }
+    ]
+  },
+  {
+    "id": "H4",
+    "title": "Custom Generator Runner",
+    "difficulty": "Hard",
+    "description": "Write an asynchronous generator yield evaluation engine wrapper function `runGenerator` that resolves yielded values or Promises sequentially, wrapping sequential outputs within returning promises.",
+    "inputFormat": "Function parameters as defined in the signature.",
+    "outputFormat": "Expected output matching the signature guidelines.",
+    "constraints": [],
+    "starterCode": "export function runGenerator(\n  generatorFn: () => Generator<any, any, any>\n): Promise<any> {\n  // Write your code here\n}",
+    "publicTestCases": [
+      {
+        "id": "H4-pub-1",
+        "is_hidden": false,
+        "input": "Default Case",
+        "expected": "true"
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "id": "H4-hid-1",
+        "is_hidden": true,
+        "input": "Default Case",
+        "expected": "true"
+      }
+    ]
+  },
+  {
+    "id": "H5",
+    "title": "Timeout Promise Guard",
+    "difficulty": "Hard",
+    "description": "Write a utility function `timeLimitPromise` that wraps a promise-returning function inside a timeout guard. If the execution limit timer is reached before resolution, reject immediately with error message `'Operation Timed Out'`.",
+    "inputFormat": "Function parameters as defined in the signature.",
+    "outputFormat": "Expected output matching the signature guidelines.",
+    "constraints": [],
+    "starterCode": "export function timeLimitPromise<T>(\n  promiseFn: () => Promise<T>,\n  ms: number\n): Promise<T> {\n  // Write your code here\n}",
+    "publicTestCases": [
+      {
+        "id": "H5-pub-1",
+        "is_hidden": false,
+        "input": "Default Case",
+        "expected": "true"
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "id": "H5-hid-1",
+        "is_hidden": true,
+        "input": "Default Case",
+        "expected": "true"
+      }
+    ]
+  },
+  {
+    "id": "H6",
+    "title": "LRU Memory Cache",
+    "difficulty": "Hard",
+    "description": "Design and implement a Least Recently Used (LRU) Cache memory management module.\n\n### Requirements\n- Initialize with specific `capacity` boundaries.\n- `get(key)`: Return value representing key presence, updating internal key usage recency representation. Returns `-1` if not found.\n- `put(key, value)`: Insert key-value pairs. If size limits are reached, discard the least recently used records instantly.",
+    "inputFormat": "Function parameters as defined in the signature.",
+    "outputFormat": "Expected output matching the signature guidelines.",
+    "constraints": [],
+    "starterCode": "export class LRUCache {\n  constructor(capacity: number) {\n    // Write your code here\n  }\n\n  get(key: any): any {\n    // Write your code here\n  }\n\n  put(key: any, value: any): void {\n    // Write your code here\n  }\n}",
+    "publicTestCases": [
+      {
+        "id": "H6-pub-1",
+        "is_hidden": false,
+        "input": "processes retrieval and eviction order validation",
+        "expected": "true"
+      },
+      {
+        "id": "H6-pub-2",
+        "is_hidden": false,
+        "input": "updates recency on accesses",
+        "expected": "true"
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "id": "H6-hid-1",
+        "is_hidden": true,
+        "input": "handles overwriting previous values on matching keys",
+        "expected": "true"
+      },
+      {
+        "id": "H6-hid-2",
+        "is_hidden": true,
+        "input": "capacity 1 operates eviction rules strictly",
+        "expected": "true"
+      },
+      {
+        "id": "H6-hid-3",
+        "is_hidden": true,
+        "input": "is able to run 100 put operations correctly",
+        "expected": "true"
+      }
+    ]
+  },
+  {
+    "id": "H7",
+    "title": "Reactive EventEmitter",
+    "difficulty": "Hard",
+    "description": "Write a fully compliant dynamic `EventEmitter` facilitating registration and broadcasting mechanics across custom action channels.\n\n### Requirements\n- `subscribe(event, callback)`: Listen to events. Return custom object with the `.unsubscribe()` capability.\n- `emit(event, args)`: Call all registered handlers with matching channel criteria, passing argument details securely.",
+    "inputFormat": "Function parameters as defined in the signature.",
+    "outputFormat": "Expected output matching the signature guidelines.",
+    "constraints": [],
+    "starterCode": "export class EventEmitter {\n  subscribe(eventName: string, callback: (...args: any[]) => any): { unsubscribe: () => void } {\n    // Write your code here\n  }\n\n  emit(eventName: string, args?: any[]): any[] {\n    // Write your code here\n  }\n}",
+    "publicTestCases": [
+      {
+        "id": "H7-pub-1",
+        "is_hidden": false,
+        "input": "subscribes to events and executes on emissions",
+        "expected": "true"
+      },
+      {
+        "id": "H7-pub-2",
+        "is_hidden": false,
+        "input": "supports unsubscribing safely from events",
+        "expected": "true"
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "id": "H7-hid-1",
+        "is_hidden": true,
+        "input": "runs all subscribers in order of registration and returns outcomes",
+        "expected": "true"
+      },
+      {
+        "id": "H7-hid-2",
+        "is_hidden": true,
+        "input": "allows setting nested subscriptions safely within handlers",
+        "expected": "true"
+      },
+      {
+        "id": "H7-hid-3",
+        "is_hidden": true,
+        "input": "calling unsubscribe multiple times has no side effects",
+        "expected": "true"
+      }
+    ]
+  },
+  {
+    "id": "H8",
+    "title": "Reactive Object Store",
+    "difficulty": "Hard",
+    "description": "Create an observable proxy store where modification triggers on any child properties raise an global subscriber registration callback.\n\n### Requirements\n- Intercept nested property modifications securely.\n- Solve without generating infinite cycle loops.",
+    "inputFormat": "Function parameters as defined in the signature.",
+    "outputFormat": "Expected output matching the signature guidelines.",
+    "constraints": [],
+    "starterCode": "export function reactiveStore<T extends object>(obj: T, callback: () => void): T {\n  // Write your code here\n}",
+    "publicTestCases": [
+      {
+        "id": "H8-pub-1",
+        "is_hidden": false,
+        "input": "triggers callback when a top-level property is updated",
+        "expected": "true"
+      },
+      {
+        "id": "H8-pub-2",
+        "is_hidden": false,
+        "input": "triggers callback for nested property modifications",
+        "expected": "true"
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "id": "H8-hid-1",
+        "is_hidden": true,
+        "input": "retains custom structures of values within properties",
+        "expected": "true"
+      },
+      {
+        "id": "H8-hid-2",
+        "is_hidden": true,
+        "input": "does not trigger callbacks if values remain strict identical",
+        "expected": "true"
+      },
+      {
+        "id": "H8-hid-3",
+        "is_hidden": true,
+        "input": "does not enter recursive call loops when setting child elements",
+        "expected": "true"
+      }
+    ]
+  },
+  {
+    "id": "H9",
+    "title": "Sequence Task Scheduler",
+    "difficulty": "Hard",
+    "description": "Write a function wrapper `sequenceTasks` performing serial task scheduling pipeline actions on dynamic asynchronizing task lists, safely carrying down resolved results sequentially.",
+    "inputFormat": "Function parameters as defined in the signature.",
+    "outputFormat": "Expected output matching the signature guidelines.",
+    "constraints": [],
+    "starterCode": "export function sequenceTasks<T>(\n  tasks: Array<(input: T) => Promise<T> | T>\n): (initialInput: T) => Promise<T> {\n  // Write your code here\n}",
+    "publicTestCases": [
+      {
+        "id": "H9-pub-1",
+        "is_hidden": false,
+        "input": "Default Case",
+        "expected": "true"
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "id": "H9-hid-1",
+        "is_hidden": true,
+        "input": "Default Case",
+        "expected": "true"
+      }
+    ]
+  },
+  {
+    "id": "H10",
+    "title": "Array Difference Matrix",
+    "difficulty": "Hard",
+    "description": "Write a function returning symmetric items differences across two multi-dimensional arrays, mapping structures, and filtering differences safely.\n\n### Requirements\n- Symmetrically evaluate matching structures within nestings.\n- Compare values recursively if they are arrays or objects, matching content identity strictly.",
+    "inputFormat": "Function parameters as defined in the signature.",
+    "outputFormat": "Expected output matching the signature guidelines.",
+    "constraints": [],
+    "starterCode": "export function arraySymmetricDiff(arr1: any[], arr2: any[]): any[] {\n  // Write your code here\n}",
+    "publicTestCases": [
+      {
+        "id": "H10-pub-1",
+        "is_hidden": false,
+        "input": "[1, 2, 3], [2, 3, 4]",
+        "expected": "[1, 4]"
+      },
+      {
+        "id": "H10-pub-2",
+        "is_hidden": false,
+        "input": "[obj1], [obj2, obj3]",
+        "expected": "[obj3]"
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "id": "H10-hid-1",
+        "is_hidden": true,
+        "input": "[], [1, 2]",
+        "expected": "[1, 2]"
+      },
+      {
+        "id": "H10-hid-2",
+        "is_hidden": true,
+        "input": "[[1, 2]], [[1, 2], [3, 4]]",
+        "expected": "[[3, 4]]"
+      },
+      {
+        "id": "H10-hid-3",
+        "is_hidden": true,
+        "input": "[{x: 1, y: 2}], [{y: 2, x: 1}]",
+        "expected": "[]"
+      },
+      {
+        "id": "H10-hid-4",
+        "is_hidden": true,
+        "input": "[null], [undefined]",
+        "expected": "[null, undefined]"
+      }
+    ]
+  }
+]

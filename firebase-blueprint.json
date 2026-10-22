@@ -1,0 +1,121 @@
+{
+  "entities": {
+    "Problem": {
+      "title": "Problem",
+      "description": "An interactive coding challenge with public and hidden validation test cases",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the problem (e.g. two-sum)"
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the challenge"
+        },
+        "difficulty": {
+          "type": "string",
+          "enum": ["Easy", "Medium", "Hard"],
+          "description": "Difficulty ranking"
+        },
+        "description": {
+          "type": "string",
+          "description": "Markdown body containing challenge description"
+        },
+        "inputFormat": {
+          "type": "string",
+          "description": "Expected input pattern"
+        },
+        "outputFormat": {
+          "type": "string",
+          "description": "Expected output description"
+        },
+        "constraints": {
+          "type": "array",
+          "description": "List of constraints as strings"
+        },
+        "starterCode": {
+          "type": "string",
+          "description": "Fallback Python starter code"
+        },
+        "starterCodes": {
+          "type": "object",
+          "description": "A map of starter code templates indexed by language ID (python, java, cpp, c)"
+        },
+        "publicTestCases": {
+          "type": "array",
+          "description": "List of public test cases displayed to users"
+        },
+        "hiddenTestCases": {
+          "type": "array",
+          "description": "List of hidden test cases used for robust judge evaluation"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp"
+        }
+      },
+      "required": ["id", "title", "difficulty", "description", "inputFormat", "outputFormat", "starterCode", "publicTestCases", "hiddenTestCases"]
+    },
+    "UserSubmission": {
+      "title": "UserSubmission",
+      "description": "User execution output logs and code track submissions",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique submission record ID"
+        },
+        "userId": {
+          "type": "string",
+          "description": "UID of the submitting user"
+        },
+        "problemId": {
+          "type": "string",
+          "description": "Associated problem ID"
+        },
+        "langId": {
+          "type": "string",
+          "description": "Language model ID utilized"
+        },
+        "code": {
+          "type": "string",
+          "description": "Full submitted code block"
+        },
+        "verdict": {
+          "type": "string",
+          "description": "Evaluation outcome verdict"
+        },
+        "passedCount": {
+          "type": "string",
+          "description": "Test verification fraction passed"
+        },
+        "runtime": {
+          "type": "string",
+          "description": "Evaluated mock computer runtime"
+        },
+        "memory": {
+          "type": "string",
+          "description": "Evaluated memory consumption footprint"
+        },
+        "submittedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time of submission"
+        }
+      },
+      "required": ["userId", "problemId", "langId", "code", "verdict", "submittedAt"]
+    }
+  },
+  "firestore": {
+    "/problems/{problemId}": {
+      "schema": "Problem",
+      "description": "Stored practice code challenges and test cases"
+    },
+    "/submissions/{submissionId}": {
+      "schema": "UserSubmission",
+      "description": "Saved validation run histories"
+    }
+  }
+}

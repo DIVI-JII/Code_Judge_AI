@@ -1,0 +1,38 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 1. Default safety net (deny all)
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Common helper primitives
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // Problems Collection
+    match /problems/{problemId} {
+      // Anyone can read problems to practice
+      allow read: if true;
+      // Allow write operations only for the authorized administrator/developer
+      allow write: if isSignedIn() && request.auth.token.email == "divyasanthigandhi@gmail.com" && request.auth.token.email_verified == true;
+    }
+
+    // Submissions Collection
+    match /submissions/{submissionId} {
+      // Users can only read their own submissions
+      allow read: if isSignedIn() && resource.data.userId == request.auth.uid;
+      // Force secure, server-enforced list queries
+      allow list: if isSignedIn() && resource.data.userId == request.auth.uid;
+      // Allow submission creation owned by the logged-in user
+      allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid;
+      // Submissions are immutable once created
+      allow update, delete: if false;
+    }
+  }
+}
